@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="keywords" content="周硕的博客, 前端博客">
+  <meta name="description" content="周硕的个人博客，此博客是我记录工作和学习的地方。">
+  <title>【笔记】 vim命令大全 | 周硕的博客</title>
+  
+  
+  <link rel="shortcut icon" href="/blog/assets/favicon.ico" >
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow-night.min.css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+</head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/blog/assets/header.png)">
+        <div class='av-pic' style="background-image: url(/blog/assets/logo.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>周硕的博客</div>
+        
+        <ul>
+          
+            <a href="/blog/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/blog/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/blog/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/blog/about/" class="Btn">
+              <li>About</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+            
+                <a href="https://github.com/zhoushuozh/">
+                    <img src="/blog/assets/github.svg" />
+                </a>
+            
+        
+            
+                <a href="https://weibo.com/zhoushuozh/">
+                    <img src="/blog/assets/weibo.svg" />
+                </a>
+            
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>【笔记】 vim命令大全</h1>
+    </header>
+
+    <section>
+      <p><img src="https://blog.zhoushuo.me/vim.jpg" alt="vim"></p>
+<a id="more"></a>
+<h3 id="光标控制命令"><a href="#光标控制命令" class="headerlink" title="光标控制命令"></a>光标控制命令</h3><p>“h”、”j”、”k”、”l”分别控制光标左、下、上、右移一格。</p>
+<p>“w”： 光标跳到下个字的开头。</p>
+<p>“e”： 光标跳到下个字的字尾。</p>
+<p>“b”： 光标回到上个字的开头。</p>
+<p>“)” ： 光标移至句尾</p>
+<p>“(“ ： 光标移至句首</p>
+<p>“}”： 光标移至段落开头</p>
+<p>“{“： 光标移至段落结尾</p>
+<p>“nl”： 光标移动该行的第n个位置，例如： “5l”表示移动到该行的第5个字符。</p>
+<p>“ctrl+b”： 屏幕往后移动一页。</p>
+<p>“ctrl+f”： 屏幕往前移动一页。</p>
+<p>“ctrl+u”： 屏幕往后移动半页。</p>
+<p>“ctrl+d”： 屏幕往前移动半页。</p>
+<p>—数字”0”： 移动到文本的开头。</p>
+<p>“G”： 移动到文件的最后。</p>
+<p>—“$”： 移动到光标所在行的行尾。</p>
+<p>“^”： 移动到光标所在行的行首。</p>
+<h3 id="文本插入文本"><a href="#文本插入文本" class="headerlink" title="文本插入文本"></a>文本插入文本</h3><p>“i” ： 在光标前</p>
+<p>“I” ： 在当前行首</p>
+<p>“a”： 光标后</p>
+<p>“A”： 在当前行尾</p>
+<p>“o”： 在当前行之下新开一行</p>
+<p>“O”： 在当前行之上新开一行</p>
+<p>“r”： 替换当前字符</p>
+<p>“R”： 替换当前字符及其后的字符，直至按ESC键</p>
+<p>“s”： 从当前光标位置处开始，以输入的文本替代指定数目的字符</p>
+<p>“S”： 删除指定数目的行，并以所输入文本代替之</p>
+<p>“ncw”或”nCW”： 修改指定数目的字</p>
+<p>“nCC”： 修改指定数目的行</p>
+<h3 id="删除命令"><a href="#删除命令" class="headerlink" title="删除命令"></a>删除命令</h3><p>“dd”： 删除整行</p>
+<p>“dw”： 删至下一个字的开头</p>
+<p>“ndw”或”ndW”： 删除光标处开始及其后的n-1个字</p>
+<p>“do”： 删至行首</p>
+<p>“d$”： 删至行尾</p>
+<p>“ndd”： 删除当前行及其后n-1行</p>
+<p>“x”或”X”： 删除一个字符，x删除光标后的，而X删除光标前的</p>
+<p>“Ctrl+u”： 删除输入方式下所输入的文本</p>
+<h3 id="复制命令"><a href="#复制命令" class="headerlink" title="复制命令"></a>复制命令</h3><p>“yw”： 将光标所在之处到字尾的字符复制到缓冲区中。</p>
+<p>“nyw”： 复制n个字到缓冲区。</p>
+<p>“yy”： 复制光标所在行到缓冲区。</p>
+<p>“nyy”： 例如： “6yy”表示复制从光标所在行开始6行字符。</p>
+<p>“p”： 将缓冲区内的字符写到光标所在位置。</p>
+<h3 id="查找与替换"><a href="#查找与替换" class="headerlink" title="查找与替换"></a>查找与替换</h3><p>“/text”： 在文件中向前查找 text</p>
+<p>“?text”： 在文件中向后查找 text</p>
+<p>“n”： 在同一方向重复查找</p>
+<p>“N”： 在相反方向重复查找</p>
+<p>“ftext”：  在当前行向前查找 text</p>
+<p>“Ftext”： 在当前行向后查找 text</p>
+<p>“ttext”： 在当前行向前查找 text，并将光标定位在 text 的第一个字符</p>
+<p>“Ttext”：  在当前行向后查找 text，并将光标定位在 text 的第一个字符</p>
+<p>“:set ic”： 查找时忽略大小写</p>
+<p>“:set noic”： 查找时对大小写敏感</p>
+<p>“:ranges/pat1/pat2/g”： 用 newtext 替换 oldtext</p>
+<p>“:m,ns/oldtext/newtext”：  在 m 行通过 n，用 newtext 替换 oldtext</p>
+<p>“:g/text1/s/text2/text3”：  查找包含 text1 的行，用 text3 替换 text2</p>
+<h3 id="撤消与重复"><a href="#撤消与重复" class="headerlink" title="撤消与重复"></a>撤消与重复</h3><p>“u”： 撤消最后一次修改</p>
+<p>“U”： 撤消当前行的所有修改</p>
+<p>“.”： 重复最后一次修改</p>
+<p>“,”： 以相反的方向重复前面的 f、F、t 或 T 查找命令</p>
+<p>“;”： 重复前面的 f、F、t 或 T 查找命令</p>
+<p>“n”： 重复前面的 / 或 ? 查找命令</p>
+<p>“N”： 以相反方向重复前面的 / 或 ? 命令</p>
+<h3 id="末行模式操作"><a href="#末行模式操作" class="headerlink" title="末行模式操作"></a>末行模式操作</h3><p>“:set nu”： 列出行号</p>
+<p>“:set nonu”： 取消列出行号</p>
+<p>“:set ic”： 搜索时忽略大小写</p>
+<p>“:set noic”： 取消在搜索时忽略大小写</p>
+<p>“:n”： 跳到文件中的某一行,“n”表示一个数字，如输入数字15,再回车就会跳到文本的第15行</p>
+<p>“:!cmd”： 运行shell命令cmd</p>
+<h3 id="文本缩进"><a href="#文本缩进" class="headerlink" title="文本缩进"></a>文本缩进</h3><p>“ctrl+i”或”tab” 插入文本时，插入移动的宽度，移动宽度是事先定义好的</p>
+<p>“:set ai”： 打开自动缩进</p>
+<p>“:set sw=n”： 将移动宽度设置为 n 个字符</p>
+<p>“n&gt;”： 使 n 行都向右移动一个宽度，例如 3&gt;&gt; 就将接下来的三行每行都向右移动一个移动宽度</p>
+<h3 id="保存和退出"><a href="#保存和退出" class="headerlink" title="保存和退出"></a>保存和退出</h3><p>“:w”： 保存文件但不退出 vi</p>
+<p>“:w file”： 将修改保存在 file 中但不退出 vi</p>
+<p>“:wq” 或 “ZZ” 或 “:x”： 保存文件并退出 vi</p>
+<p>“:q!”： 不保存文件，退出 vi</p>
+<p>“:e!”： 放弃所有修改，从上次保存文件开始再编辑</p>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2018-03-20T03:39:21.000Z" itemprop="datePublished">
+              2018-03-20
+            </time>
+          </div>
+          
+            <div>
+              tags: 
+  <li class="meta-text">
+  { <a href="/blog/tags/vim/">vim</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/blog/tags/编辑器/">编辑器</a> }
+  </li>
+
+
+            </div>
+          
+      </section>
+    
+     
+</article>
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk-container"></div>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'd50f82d1de5ab2dd34c6',
+        clientSecret: '7ed79e0b3ad122582d5c8d7d5a295c1142743477',
+        id: window.location.pathname,
+        repo: 'comments',
+        owner: 'zhoushuozh',
+        admin: 'zhoushuozh'
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+</div>
+
+            <footer>
+    <div>&copy; 2018 - 周硕 </div>
+    <div>
+    Powered by Hexo &nbsp; Theme by icalm
+    </div>
+</footer>
+        </div>
+    </div>
+</div>
+<script src="/blog/js/pager/dist/singlepager.js"></script>
+<script>
+var sp = new Pager('data-pager-shell')
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<!--<script>hljs.initHighlightingOnLoad();</script>-->
+</body>
+</html>

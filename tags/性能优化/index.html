@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="keywords" content="周硕的博客, 前端博客">
+  <meta name="description" content="周硕的个人博客，此博客是我记录工作和学习的地方。">
+  <title>周硕的博客</title>
+  
+  
+  <link rel="shortcut icon" href="/blog/assets/favicon.ico" >
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow-night.min.css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+</head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/blog/assets/header.png)">
+        <div class='av-pic' style="background-image: url(/blog/assets/logo.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>周硕的博客</div>
+        
+        <ul>
+          
+            <a href="/blog/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/blog/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/blog/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/blog/about/" class="Btn">
+              <li>About</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+            
+                <a href="https://github.com/zhoushuozh/">
+                    <img src="/blog/assets/github.svg" />
+                </a>
+            
+        
+            
+                <a href="https://weibo.com/zhoushuozh/">
+                    <img src="/blog/assets/weibo.svg" />
+                </a>
+            
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ 性能优化 }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/blog/2018/01/18/js-throttle-debounce/">JS函数节流(throttle)与函数去抖(debounce)</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2018-01-18T13:23:43.000Z" itemprop="datePublished">
+    2018-01-18
+  </time>
+  
+  | 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/blog/tags/JavaScript/">JavaScript</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/blog/tags/性能优化/">性能优化</a> }
+  </li>
+
+
+  </ul>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/blog/categories/前端/">前端</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在浏览器 DOM 事件里面，有一些事件会随着用户的操作不间断触发。如：改变窗口大小（resize）、鼠标滚动（scroll）、鼠标移动（mousemove），如果把逻辑函数直接绑定到这些事件上，会严重影响性能，再比如把ajax请求直接绑定到keydown事件上，将在用户输入时产生频率很高的ajax请求，给服务器造成不必要的响应压力。</p>
+        
+          <div class="more-link">
+            <a href="/blog/2018/01/18/js-throttle-debounce/#more">read more »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+
+
+            <footer>
+    <div>&copy; 2018 - 周硕 </div>
+    <div>
+    Powered by Hexo &nbsp; Theme by icalm
+    </div>
+</footer>
+        </div>
+    </div>
+</div>
+<script src="/blog/js/pager/dist/singlepager.js"></script>
+<script>
+var sp = new Pager('data-pager-shell')
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<!--<script>hljs.initHighlightingOnLoad();</script>-->
+</body>
+</html>

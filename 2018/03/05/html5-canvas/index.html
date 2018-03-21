@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="keywords" content="周硕的博客, 前端博客">
+  <meta name="description" content="周硕的个人博客，此博客是我记录工作和学习的地方。">
+  <title>HTML5 Canvas 基础 | 周硕的博客</title>
+  
+  
+  <link rel="shortcut icon" href="/blog/assets/favicon.ico" >
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow-night.min.css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+</head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/blog/assets/header.png)">
+        <div class='av-pic' style="background-image: url(/blog/assets/logo.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>周硕的博客</div>
+        
+        <ul>
+          
+            <a href="/blog/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/blog/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/blog/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/blog/about/" class="Btn">
+              <li>About</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+            
+                <a href="https://github.com/zhoushuozh/">
+                    <img src="/blog/assets/github.svg" />
+                </a>
+            
+        
+            
+                <a href="https://weibo.com/zhoushuozh/">
+                    <img src="/blog/assets/weibo.svg" />
+                </a>
+            
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>HTML5 Canvas 基础</h1>
+    </header>
+
+    <section>
+      <p><code>&lt;canvas&gt;</code> 是HTML5新增的元素，可以用于绘制图形，制作照片，创建动画。<code>&lt;canvas&gt;</code> 标签只是图形容器，它没有自己的行为，必须使用脚本来绘制图形。</p>
+<h3 id="创建一个canvas"><a href="#创建一个canvas" class="headerlink" title="创建一个canvas"></a>创建一个canvas</h3><pre><code class="HTML">&lt;canvas id=&quot;mycanvas&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;&lt;/canvas&gt;
+</code></pre>
+<a id="more"></a>
+<p><code>&lt;canvas&gt;</code>标签只有两个属性—— <code>width</code>和<code>height</code>，当没有设置宽度和高度的时候，<code>&lt;canvas&gt;</code> 的默认大小为300px×150px。需要注意的是，如果使用<code>css</code>来定义<code>&lt;canvas&gt;</code>的大小，在绘制时图像会伸缩以适应它的框架尺寸：如果CSS的尺寸与初始画布的比例不一致，它会出现扭曲。</p>
+<h3 id="渲染上下文"><a href="#渲染上下文" class="headerlink" title="渲染上下文"></a>渲染上下文</h3><p><code>&lt;canvas&gt;</code>元素本身是没有绘图能力的。所有的绘制工作必须在 JavaScript 内部完成。</p>
+<p><code>&lt;canvas&gt;</code>创造了一个固定大小的画布，它公开了一个或多个渲染上下文，其可以用来绘制和处理要展示的内容。</p>
+<p>canvas起初是空白的，首先需要找到渲染上下文，然后在它的上面绘制。</p>
+<pre><code class="JavaScript">var canvas=document.getElementById(&quot;mycanvas&quot;);
+var ctx = canvas.getContext(&#39;2d&#39;);
+</code></pre>
+<p><code>&lt;canvas&gt;</code>有一个叫做 <code>getContext()</code>的方法，这个方法是用来获得渲染上下文和它的绘画功能。<code>getContext()</code>只有一个参数，就是上下文的格式。</p>
+<h3 id="检查浏览器兼容性"><a href="#检查浏览器兼容性" class="headerlink" title="检查浏览器兼容性"></a>检查浏览器兼容性</h3><p>最新版的 FireFox，Safari，Chrome 和 Opera 都支持 HTML5 <code>canvas</code>，但是 IE8及以下都不支持<code>canvas</code>。下面的代码用于检测浏览器的是否支持<code>canvas</code></p>
+<pre><code class="JavaScript">var canvas = document.getElementById(&#39;mycanvas&#39;); 
+
+if (canvas.getContext){
+    var ctx = canvas.getContext(&#39;2d&#39;);
+    // drawing code here
+} else {
+    // canvas-unsupported code here
+}
+</code></pre>
+<h3 id="canvas-坐标"><a href="#canvas-坐标" class="headerlink" title="canvas 坐标"></a>canvas 坐标</h3><p>在绘制图形之前，我们还应该先了解一下<code>canvas</code>中的坐标。<code>canvas</code>默认被网格所覆盖。通常来说网格中的一个单元相当于<code>canvas</code>元素中的一像素。栅格的起点为左上角（坐标为（0,0））。所有元素的位置都相对于原点定位。</p>
+<h3 id="绘制-canvas-图形"><a href="#绘制-canvas-图形" class="headerlink" title="绘制 canvas 图形"></a>绘制 canvas 图形</h3><p>好的，接下来我们就开始了解怎么使用Canvas的API绘制基本图形了 。</p>
+<pre><code class="JavaScript">var canvas = document.getElementById(&#39;mycanvas&#39;); 
+
+if (canvas.getContext){
+    var ctx = canvas.getContext(&#39;2d&#39;);
+    ctx.fillStyle=&quot;red&quot;;
+    ctx.fillRect(0,0,100,100);
+}
+</code></pre>
+<p>上面的两行代码绘制一个红色的矩形：</p>
+<p>设置<code>fillStyle</code>属性可以是<code>css</code>颜色，渐变，或图案。<code>fillStyle</code>默认设置是<code>#000000</code>（黑色）。</p>
+<p><code>fillRect(x,y,width,height)</code>方法定义了矩形当前的填充方式，<code>x</code>与<code>y</code>指定了在<code>canvas</code>画布上所绘制的矩形的左上角（相对于原点）的坐标。<code>width</code>和<code>height</code>设置矩形的尺寸。</p>
+<h3 id="canvas-路径"><a href="#canvas-路径" class="headerlink" title="canvas 路径"></a>canvas 路径</h3><p>路径是通过线段或曲线相连形成的不同形状的点的集合。一个路径，甚至一个子路径，都是闭合的。使用路径绘制图形需要一些额外的步骤。<br>以下是所要用到的方法：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>strokeStyle</code></td>
+<td>用于设置画笔绘制路径的颜色、渐变和模式 </td>
+</tr>
+<tr>
+<td><code>lineWidth</code></td>
+<td>定义绘制线条的宽度</td>
+</tr>
+<tr>
+<td><code>beginPath()</code></td>
+<td>开始一个新的绘制路径 </td>
+</tr>
+<tr>
+<td><code>moveTo(x,y)</code></td>
+<td>移动画笔到指定的坐标点(x,y)，该点就是新的子路径的起始点 </td>
+</tr>
+<tr>
+<td><code>lineTo(x,y)</code></td>
+<td>使用直线边接当前端点和指定的坐标点(x,y) </td>
+</tr>
+<tr>
+<td><code>stroke()</code></td>
+<td>沿着绘制路径的坐标点顺序绘制直线 </td>
+</tr>
+<tr>
+<td><code>closePath()</code></td>
+<td>如果当前的绘制路径是打开的，则关闭掉该绘制路径</td>
+</tr>
+</tbody>
+</table>
+<p>这里需要注意的是，当你调用fill()函数时，所有没有闭合的形状都会自动闭合，所以你不需要调用closePath()函数。但是调用stroke()时不会自动闭合。</p>
+<p>下面的代码绘制了一个三角形：</p>
+<pre><code class="JavaScript">function draw() {
+ var canvas = document.getElementById(&#39;canvas&#39;);
+     if (canvas.getContext){
+        var ctx = canvas.getContext(&#39;2d&#39;);
+        ctx.beginPath();
+        ctx.moveTo(75,50);
+        ctx.lineTo(100,75);
+        ctx.lineTo(100,25);
+        ctx.fill();
+    }
+}
+</code></pre>
+<h3 id="canvas-圆弧"><a href="#canvas-圆弧" class="headerlink" title="canvas 圆弧"></a>canvas 圆弧</h3><p>绘制路径我们可以使用<code>arc()</code>方法。该方法有六个参数：<code>x,y</code>为绘制圆弧所在圆上的圆心坐标。<code>radius</code>为半径。<code>startAngle</code>以及<code>endAngle</code>参数用弧度定义了开始以及结束的弧度。这些都是以x轴为基准。参数<code>anticlockwise</code>为一个布尔值。为<code>true</code>时，是逆时针方向，否则顺时针方向。</p>
+<pre><code class="JavaScript">var canvas=document.getElementById(&quot;mycanvas&quot;);
+var ctx=canvas.getContext(&quot;2d&quot;);
+ctx.beginPath();
+ctx.arc(95,50,40,0,2*Math.PI);
+ctx.stroke();
+</code></pre>
+<p>注意：arc()函数中的角度单位是弧度，不是度数。角度与弧度的js表达式:radians=(Math.PI/180)*degrees。</p>
+<h3 id="canvas-文本"><a href="#canvas-文本" class="headerlink" title="canvas 文本"></a>canvas 文本</h3><p>canvas 提供了两种方法来渲染文本：</p>
+<p><code>fillText(text, x, y [, maxWidth])</code> 在指定的(x,y)位置填充指定的文本，绘制的最大宽度是可选的。</p>
+<p><code>strokeText(text, x, y [, maxWidth])</code> 在指定的(x,y)位置绘制文本边框，绘制的最大宽度是可选的。<br>文本被填充方式：</p>
+<pre><code class="JavaScript">var canvas=document.getElementById(&quot;mycanvas&quot;);
+var ctx=canvas.getContext(&quot;2d&quot;);
+ctx.font=&quot;30px Arial&quot;;
+ctx.fillText(&quot;Hello World&quot;,10,50);
+</code></pre>
+<p>文本边框备绘制方式：</p>
+<pre><code class="JavaScript">var canvas=document.getElementById(&quot;mycanvas&quot;);
+var ctx=canvas.getContext(&quot;2d&quot;);
+ctx.font=&quot;30px Arial&quot;;
+ctx.strkeText(&quot;Hello World&quot;,10,50);
+</code></pre>
+<h3 id="canvas-图像"><a href="#canvas-图像" class="headerlink" title="canvas 图像"></a>canvas 图像</h3><p>引入图像到<code>canvas</code>里需要以下两步基本操作：</p>
+<ol>
+<li>获取一个指向<code>HTMLImageElement</code>的对象或者另一个<code>canvas</code>元素的引用作为源，也可以通过提供一个URL的方式来使用图片。</li>
+<li>使用<code>drawImage()</code>函数将图片绘制到画布上。</li>
+</ol>
+<p>获取图片和绘制图片，下面只展示最简单的一种：</p>
+<pre><code class="JavaScript">var canvas=document.getElementById(&quot;mycanvas&quot;);
+var ctx=canvas.getContext(&quot;2d&quot;);
+var img=document.getElementById(&quot;img&quot;);
+ctx.drawImage(img,10,10);
+</code></pre>
+<p><code>drawImage</code>有三个参数：<code>drawImage(image, x, y)</code>。其中<code>image</code>是<code>image</code>或者 <code>canvas</code>对象，<code>x</code>和<code>y</code>是其在目标<code>canvas</code>里的起始坐标。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>今天已经很晚了，关于<code>canvas</code>暂时就先讲到这里，以上就是关于canvas的基础功能的一些介绍。</p>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2018-03-05T15:21:54.000Z" itemprop="datePublished">
+              2018-03-05
+            </time>
+          </div>
+          
+            <div>
+              tags: 
+  <li class="meta-text">
+  { <a href="/blog/tags/JavaScript/">JavaScript</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/blog/tags/HTML5/">HTML5</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/blog/tags/canvas/">canvas</a> }
+  </li>
+
+
+            </div>
+          
+      </section>
+    
+     
+</article>
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk-container"></div>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'd50f82d1de5ab2dd34c6',
+        clientSecret: '7ed79e0b3ad122582d5c8d7d5a295c1142743477',
+        id: window.location.pathname,
+        repo: 'comments',
+        owner: 'zhoushuozh',
+        admin: 'zhoushuozh'
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+</div>
+
+            <footer>
+    <div>&copy; 2018 - 周硕 </div>
+    <div>
+    Powered by Hexo &nbsp; Theme by icalm
+    </div>
+</footer>
+        </div>
+    </div>
+</div>
+<script src="/blog/js/pager/dist/singlepager.js"></script>
+<script>
+var sp = new Pager('data-pager-shell')
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<!--<script>hljs.initHighlightingOnLoad();</script>-->
+</body>
+</html>

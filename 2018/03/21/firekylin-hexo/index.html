@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="keywords" content="周硕的博客, 前端博客">
+  <meta name="description" content="周硕的个人博客，此博客是我记录工作和学习的地方。">
+  <title>博客从Firekylin迁移到Hexo | 周硕的博客</title>
+  
+  
+  <link rel="shortcut icon" href="/blog/assets/favicon.ico" >
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow-night.min.css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+</head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url(/blog/assets/header.png)">
+        <div class='av-pic' style="background-image: url(/blog/assets/logo.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>周硕的博客</div>
+        
+        <ul>
+          
+            <a href="/blog/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/blog/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/blog/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/blog/about/" class="Btn">
+              <li>About</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+            
+                <a href="https://github.com/zhoushuozh/">
+                    <img src="/blog/assets/github.svg" />
+                </a>
+            
+        
+            
+                <a href="https://weibo.com/zhoushuozh/">
+                    <img src="/blog/assets/weibo.svg" />
+                </a>
+            
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>博客从Firekylin迁移到Hexo</h1>
+    </header>
+
+    <section>
+      <h2 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h2><p>之前使用的一直是Firekylin，Firekylin是由360公司Web前端工程师组成的专业团队 75Team 进行开发和维护，基于ThinkJS开发，快速很快且后台管理很方便。但是前些天突然想把博客放到二级目录，在折腾的过程中出现了一些问题，如静态资源无法加载，尝试了很多办法，最终都没不能完全解决这个问题。查了一下，<code>Firekylin</code>在设计之初没有考虑子目录，本着“生命不息，折腾不止”的精神，我决定把博客迁移到<code>Hexo</code>。</p>
+<a id="more"></a>
+<p><code>Hexo</code>也是一款基于<code>Node.js</code>的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在<code>GitHub</code>，<code>Hexo</code>同样支持<code>markdown</code>，写起来也很顺手。因为<code>Hexo</code>的创建者是台湾人，对中文的支持很友好，可以选择中文文档进行查看。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>我用的系统是<code>ubuntu</code>，所以下面命令均是在<code>ubuntu</code>上完成的。</p>
+<p>安装<code>nodejs</code>和<code>npm</code></p>
+<pre><code class="shell">$ sudo apt-get install python-software-properties
+$ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+$ sudo apt-get install nodejs
+</code></pre>
+<p>安装<code>nodejs</code>和<code>npm</code>的方法网上还有很多，这里就不再赘述了。</p>
+<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><p>使用npm命令安装Hexo</p>
+<pre><code class="shell">$ npm install -g hexo-cli 
+</code></pre>
+<p>初始化博客</p>
+<pre><code class="shell">$ hexo init blog
+$ cd blog
+$ npm install
+</code></pre>
+<p>以上命令完成后，会在目标目录生成以下的目录结构：</p>
+<pre><code class="shell">.
+├── _config.yml
+├── package.json
+├── scaffolds
+├── source
+|   ├── _drafts
+|   └── _posts
+└── themes
+</code></pre>
+<ul>
+<li>_config.yml 是博客的配置文件。</li>
+<li>scaffolds 是博客文章模板。</li>
+<li>source 是博客文章目录。</li>
+<li>themes 存放主题风格文件。</li>
+</ul>
+<h2 id="配置Hexo"><a href="#配置Hexo" class="headerlink" title="配置Hexo"></a>配置Hexo</h2><p><code>Hexo</code>的配置信息都储存在<code>_config.yml</code>中，需要注意的一点：冒号后面一定要加空格！</p>
+<p>下面是<code>Hexo</code>的一些基础配置：</p>
+<pre><code class="shell"># 网站信息
+title: #标题
+subtitle: #副标题
+description: #网站描述
+author: #作者昵称
+language: #网站语言，默认英语，设置简体汉语
+
+# 网址设置
+#网址 因为我的博客是放在子目录中，所以将url设置成&#39;http://zhoushuo.me/blog&#39;
+url: http://zhoushuo.me/blog/
+root: /blog/ #博客根目录，同上。
+
+# 主题配置
+theme: # 对应themes下存放主题的文件夹名
+</code></pre>
+<p>如果是要部署到<code>Github</code>需要修改一下部署配置：</p>
+<pre><code class="shell"># 部署配置
+deploy:
+  type: git
+  repo: # github仓库名
+  branch: master
+</code></pre>
+<p>更多详细配置可以查看官方文档：<a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/configuration.html</a></p>
+<h2 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h2><p>我的博客是部署在我的云主机上的，所以需要在nginx配置里面添加一条解析：</p>
+<pre><code class="shell">location /blog/ {
+    alias /home/ubuntu/www/blog/public/;
+}
+</code></pre>
+<p>这样在浏览器里输入网址就可以访问了。</p>
+<h2 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h2><p><code>Hexo</code>提供了很多主题，可以打开<a href="https://hexo.io/themes/" target="_blank" rel="noopener">Hexo官方主题</a>浏览查看，选择自己喜欢的主题。我这里使用的是<a href="https://github.com/nameoverflow/hexo-theme-icalm" target="_blank" rel="noopener">icalm</a>，下面也是以<code>icalm</code>为例：</p>
+<pre><code class="shell">$ git clone git@github.com:nameoverflow/hexo-theme-icalm.git
+</code></pre>
+<p>启用主题：</p>
+<p>修改博客目录<code>blog\_config.yml</code>中的<code>theme</code>属性，将其设置为<code>icalm</code>。</p>
+<pre><code class="shell">theme: icalm
+</code></pre>
+<h2 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h2><p>主题的配置在<code>\themes\icalm\_config.yml</code>文件里面。每个主题的配置内容也都不太一样，一般来说，主题的作者都会有对主题的相关介绍，看他介绍的修改就可以了。我主要针对导航栏简单说明一下。</p>
+<pre><code class="shell">#因为我的博客是放在子目录中，所以路径前面加了/blog
+menu: #导航栏
+  Home: /blog/ #主页
+  Archive: /blog/archives/ #归档
+  Tags: /blog/tags/ #标签
+  About: /blog/about/ #关于
+</code></pre>
+<h2 id="Hexo命令"><a href="#Hexo命令" class="headerlink" title="Hexo命令"></a>Hexo命令</h2><pre><code class="shell">npm install hexo -g     #安装Hexo
+npm update hexo -g    #升级 
+hexo init    #初始化博客
+
+#命令简写
+hexo n  &quot;我的博客&quot; == hexo new  &quot;我的博客&quot;   #新建文章
+hexo g == hexo generate   #生成
+hexo s == hexo server   #启动服务预览
+hexo d == hexo deploy   #部署
+hexo server     #Hexo会监视文件变动并自动更新，无须重启服务器
+hexo server -s    #静态模式
+hexo server -p 5000     #更改端口
+hexo server -i 192.168.1.1     #自定义 IP
+hexo clean     #清除缓存，若是网页正常情况下可以忽略这条命令
+</code></pre>
+<p>注意，这里的命令都是作用在<code>Hexo</code>博客所在的文件夹中。</p>
+<h2 id="写作"><a href="#写作" class="headerlink" title="写作"></a>写作</h2><p>博客基本配置完成了，主题也更换了，开始写一篇文章吧！</p>
+<pre><code class="shell">$ hexo n &quot;开博大吉&quot;
+</code></pre>
+<p>这时候，你会看到一个 md 文件的路径：</p>
+<pre><code class="shell">$ hexo n &quot;开博大吉&quot;
+INFO  Created: ~/www/blog/source/_posts/开博大吉.md
+</code></pre>
+<p>复制路径，用vim打开md文件</p>
+<pre><code class="shell">$ vim ~/www/blog/source/_posts/开博大吉.md
+</code></pre>
+<p>然后就可以写博客内容了，写完之后保存退出。然后生成html文件，部署。</p>
+<pre><code class="shell">$ hexi g -d
+</code></pre>
+<h2 id="添加文章抬头信息"><a href="#添加文章抬头信息" class="headerlink" title="添加文章抬头信息"></a>添加文章抬头信息</h2><p>Hexo默认新建的文章抬头已有<code>title</code>、<code>date</code>、<code>tags</code>等属性，可能缺乏<code>categories</code>和<code>meta</code>标签，想要指定目录就需要添加<code>categories</code>属性，而<code>meta</code>标签则是为了便于搜索引擎的收录。</p>
+<pre><code class="makefile">title:  #文章标题
+date:  #时间，一般不用改
+categories:  #目录分类
+tags:  #标签，格式可以是[Hexo,总结]，中间用英文逗号分开
+keywords:  #文章关键词，多个关键词用英文逗号隔开
+---
+</code></pre>
+<h2 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h2><p>接下来就是把之前<code>Firekylin</code>里面的博文迁移到<code>Hexo</code>上。<code>Hexo</code>的md文件都保存在<code>/blog/source/_posts/</code>下，所以我只需要将<code>Firekylin</code>里导出的md文件上传到这个目录下，然后生成部署就可以了。</p>
+<p>到这里博客迁移就基本完成了，当然还有很多细节需要完善，就先写到这里，有时间继续折腾。</p>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2018-03-21T05:25:37.142Z" itemprop="datePublished">
+              2018-03-21
+            </time>
+          </div>
+          
+            <div>
+              tags: 
+  <li class="meta-text">
+  { <a href="/blog/tags/hexo/">hexo</a> }
+  </li>
+
+
+            </div>
+          
+      </section>
+    
+     
+</article>
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk-container"></div>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'd50f82d1de5ab2dd34c6',
+        clientSecret: '7ed79e0b3ad122582d5c8d7d5a295c1142743477',
+        id: window.location.pathname,
+        repo: 'comments',
+        owner: 'zhoushuozh',
+        admin: 'zhoushuozh'
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+</div>
+
+            <footer>
+    <div>&copy; 2018 - 周硕 </div>
+    <div>
+    Powered by Hexo &nbsp; Theme by icalm
+    </div>
+</footer>
+        </div>
+    </div>
+</div>
+<script src="/blog/js/pager/dist/singlepager.js"></script>
+<script>
+var sp = new Pager('data-pager-shell')
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<!--<script>hljs.initHighlightingOnLoad();</script>-->
+</body>
+</html>
