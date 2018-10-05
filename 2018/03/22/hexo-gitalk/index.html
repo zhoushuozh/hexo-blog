@@ -13,7 +13,7 @@
   
   <link rel="stylesheet" href="/blog/css/highlight_themes/tomorrow.css">
   
-  <link rel="stylesheet" href="/blog/css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
   
   <!-- global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111550549-1"></script>
@@ -32,8 +32,8 @@
 <body>
 <div class="Shell">
     <aside class='SideBar'>
-    <section class='avatar' style="background: #333 url(/blog/assets/header-bg2.jpg) no-repeat center; background-size:cover;">
-        <div class='av-pic' style="background-image: url(/blog/assets/logo.jpg)">
+    <section class='avatar' style="background: #333 url(/assets/header-bg2.jpg) no-repeat center; background-size:cover;">
+        <div class='av-pic' style="background-image: url(/assets/logo.jpg)">
         </div>
     </section>
     <section class='menu'>
@@ -41,19 +41,19 @@
         
         <ul>
           
-            <a href="/blog/" class="Btn">
+            <a href="/" class="Btn">
               <li>Home</li>
             </a>  
           
-            <a href="/blog/archives/" class="Btn">
+            <a href="/archives/" class="Btn">
               <li>Archive</li>
             </a>  
           
-            <a href="/blog/tags/" class="Btn">
+            <a href="/tags/" class="Btn">
               <li>Tags</li>
             </a>  
           
-            <a href="/blog/about/" class="Btn">
+            <a href="/about/" class="Btn">
               <li>About</li>
             </a>  
           
@@ -109,7 +109,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'gitalk/dist/gitalk.css'</span></span><br><span class="line"><span class="keyword">import</span> Gitalk <span class="keyword">from</span> <span class="string">'gitalk'</span></span><br></pre></td></tr></table></figure>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h3><p>Github上新建一个仓库，操作简单，这里就不废话了。</p>
 <h3 id="创建OAuth-Application"><a href="#创建OAuth-Application" class="headerlink" title="创建OAuth Application"></a>创建OAuth Application</h3><p>Gitalk 需要一个 Github Application，<a href="https://github.com/settings/applications/new" target="_blank" rel="noopener">点击这里申请</a>。当然，也可以在用户头像下的setting下的Developer settings中new一个Application，然后填写相应的参数。</p>
-<p><img src="https://blog.zhoushuo.me/gitalk-app.png" alt="OAuth Application"></p>
+<p><img src="https://cdn.zhoushuo.me/gitalk-app.png" alt="OAuth Application"></p>
 <p>完成后会生成相应的<code>clientID</code>and<code>clientSecret</code>。</p>
 <h2 id="集成-Gitalk"><a href="#集成-Gitalk" class="headerlink" title="集成 Gitalk"></a>集成 Gitalk</h2><p>找到<code>icalm/layout/_partial/comment.ejs</code>文件，把这段代码粘进去。注意，不同的主题方式不太一样。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://unpkg.com/gitalk/dist/gitalk.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"gitalk-container"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/gitalk/dist/gitalk.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> gitalk = <span class="keyword">new</span> Gitalk(&#123;</span></span><br><span class="line"><span class="javascript">        clientID: <span class="string">'&lt;%= theme.gitalk.clientID %&gt;'</span>,</span></span><br><span class="line"><span class="javascript">        clientSecret: <span class="string">'&lt;%= theme.gitalk.clientSecret %&gt;'</span>,</span></span><br><span class="line"><span class="javascript">        id: <span class="built_in">window</span>.location.pathname,</span></span><br><span class="line"><span class="javascript">        repo: <span class="string">'&lt;%= theme.gitalk.repo %&gt;'</span>,</span></span><br><span class="line"><span class="javascript">        owner: <span class="string">'&lt;%= theme.gitalk.owner %&gt;'</span>,</span></span><br><span class="line"><span class="javascript">        admin: <span class="string">'&lt;%= theme.gitalk.admin %&gt;'</span></span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="javascript">    gitalk.render(<span class="string">'gitalk-container'</span>)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -136,15 +136,15 @@
             <div>
               tags: 
   <li class="meta-text">
-  { <a href="/blog/tags/Gitalk/">Gitalk</a> }
+  { <a href="/tags/Gitalk/">Gitalk</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/blog/tags/MarkDown/">MarkDown</a> }
+  { <a href="/tags/MarkDown/">MarkDown</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/blog/tags/Hexo/">Hexo</a> }
+  { <a href="/tags/Hexo/">Hexo</a> }
   </li>
 
 
@@ -182,7 +182,7 @@
         </div>
     </div>
 </div>
-<script src="/blog/js/pager/dist/singlepager.js"></script>
+<script src="/js/pager/dist/singlepager.js"></script>
 <!--<script>
 var sp = new Pager('data-pager-shell')
 </script>-->

@@ -13,7 +13,7 @@
   
   <link rel="stylesheet" href="/blog/css/highlight_themes/tomorrow.css">
   
-  <link rel="stylesheet" href="/blog/css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
   
   <!-- global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111550549-1"></script>
@@ -32,8 +32,8 @@
 <body>
 <div class="Shell">
     <aside class='SideBar'>
-    <section class='avatar' style="background: #333 url(/blog/assets/header-bg2.jpg) no-repeat center; background-size:cover;">
-        <div class='av-pic' style="background-image: url(/blog/assets/logo.jpg)">
+    <section class='avatar' style="background: #333 url(/assets/header-bg2.jpg) no-repeat center; background-size:cover;">
+        <div class='av-pic' style="background-image: url(/assets/logo.jpg)">
         </div>
     </section>
     <section class='menu'>
@@ -41,19 +41,19 @@
         
         <ul>
           
-            <a href="/blog/" class="Btn">
+            <a href="/" class="Btn">
               <li>Home</li>
             </a>  
           
-            <a href="/blog/archives/" class="Btn">
+            <a href="/archives/" class="Btn">
               <li>Archive</li>
             </a>  
           
-            <a href="/blog/tags/" class="Btn">
+            <a href="/tags/" class="Btn">
               <li>Tags</li>
             </a>  
           
-            <a href="/blog/about/" class="Btn">
+            <a href="/about/" class="Btn">
               <li>About</li>
             </a>  
           
@@ -111,7 +111,7 @@
 <p>通过这样的三次握手，客户端与服务端建立起可靠的双工的连接，开始传送数据。</p>
 <p>为保证信息传输的可靠性，三次握手过程中，若一方收不到确认信号，协议会要求重新发送信号。</p>
 <h2 id="3-HTTP发起请求"><a href="#3-HTTP发起请求" class="headerlink" title="3. HTTP发起请求"></a>3. HTTP发起请求</h2><p>HTTP 请求报文由四部分组成：请求行、请求头、空行、消息体。</p>
-<p><img src="https://blog.zhoushuo.me/request-headers.jpg" alt="chrome-request-headers"></p>
+<p><img src="https://cdn.zhoushuo.me/request-headers.jpg" alt="chrome-request-headers"></p>
 <p>一个典型的 http request header 一般需要包括请求的方法，例如 GET 或者 POST 等，不常用的还有 PUT 和 DELETE 方法，更加不常用的还有 HEAD 和 OPTION 以及 TRACE 方法，一般的浏览器只能发起 GET 或者 POST 请求。</p>
 <h2 id="4-服务器处理请求"><a href="#4-服务器处理请求" class="headerlink" title="4. 服务器处理请求"></a>4. 服务器处理请求</h2><p>服务器在收到浏览器发送的 HTTP 请求之后，会将收到的HTTP报文封装成HTTP的Request对象，并通过不同的Web服务器进行处理，处理完的结果以 HTTP 的 Response 对象返回，主要包括状态码，响应头，响应报文三个部分。</p>
 <p><strong>HTTP状态码共分为5种类型：</strong></p>
@@ -128,7 +128,7 @@
 <li>500 - 内部服务器错误</li>
 </ul>
 <h2 id="5-页面渲染"><a href="#5-页面渲染" class="headerlink" title="5. 页面渲染"></a>5. 页面渲染</h2><p>当浏览器接收到报文，根据收到的资源的类型，进行语法解析，解析相应的内部数据结构，然后将资源组织成屏幕上显示的图像，这个过程叫渲染。网页渲染是浏览器最复杂、最核心的功能。</p>
-<p><img src="https://blog.zhoushuo.me/dom-render.jpg" alt="render"></p>
+<p><img src="https://cdn.zhoushuo.me/dom-render.jpg" alt="render"></p>
 <p>浏览器会解析三个东西： </p>
 <ul>
 <li><p>HTML/SVG/XHTML，解析这三种文件会产生一个 DOM Tree。 </p>
@@ -173,7 +173,7 @@
             <div>
               tags: 
   <li class="meta-text">
-  { <a href="/blog/tags/HTTP/">HTTP</a> }
+  { <a href="/tags/HTTP/">HTTP</a> }
   </li>
 
 
@@ -211,7 +211,7 @@
         </div>
     </div>
 </div>
-<script src="/blog/js/pager/dist/singlepager.js"></script>
+<script src="/js/pager/dist/singlepager.js"></script>
 <!--<script>
 var sp = new Pager('data-pager-shell')
 </script>-->

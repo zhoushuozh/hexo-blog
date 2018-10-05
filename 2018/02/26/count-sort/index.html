@@ -13,7 +13,7 @@
   
   <link rel="stylesheet" href="/blog/css/highlight_themes/tomorrow.css">
   
-  <link rel="stylesheet" href="/blog/css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
   
   <!-- global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111550549-1"></script>
@@ -32,8 +32,8 @@
 <body>
 <div class="Shell">
     <aside class='SideBar'>
-    <section class='avatar' style="background: #333 url(/blog/assets/header-bg2.jpg) no-repeat center; background-size:cover;">
-        <div class='av-pic' style="background-image: url(/blog/assets/logo.jpg)">
+    <section class='avatar' style="background: #333 url(/assets/header-bg2.jpg) no-repeat center; background-size:cover;">
+        <div class='av-pic' style="background-image: url(/assets/logo.jpg)">
         </div>
     </section>
     <section class='menu'>
@@ -41,19 +41,19 @@
         
         <ul>
           
-            <a href="/blog/" class="Btn">
+            <a href="/" class="Btn">
               <li>Home</li>
             </a>  
           
-            <a href="/blog/archives/" class="Btn">
+            <a href="/archives/" class="Btn">
               <li>Archive</li>
             </a>  
           
-            <a href="/blog/tags/" class="Btn">
+            <a href="/tags/" class="Btn">
               <li>Tags</li>
             </a>  
           
-            <a href="/blog/about/" class="Btn">
+            <a href="/about/" class="Btn">
               <li>About</li>
             </a>  
           
@@ -95,7 +95,7 @@
 <li>对所有的计数累加（从 <code>C</code> 中的第一个元素开始，每一项和前一项相加）</li>
 <li>反向填充目标数组：将每个元素 <code>i</code> 放在新数组的第 <code>C [i]</code> 项，每放一个元素就将 <code>C[i]</code> 减去1</li>
 </ol>
-<h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><p><img src="https://blog.zhoushuo.me/countsort.jpg" alt="计数排序流程图"></p>
+<h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><p><img src="https://cdn.zhoushuo.me/countsort.jpg" alt="计数排序流程图"></p>
 <h3 id="JavaScript代码实现"><a href="#JavaScript代码实现" class="headerlink" title="JavaScript代码实现"></a>JavaScript代码实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">countSort</span>(<span class="params">arr,min,max</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> len =arr.length,</span><br><span class="line">      <span class="comment">// 桶数组 </span></span><br><span class="line">      count = [],</span><br><span class="line">      <span class="comment">// 输出数组  </span></span><br><span class="line">      result = [];</span><br><span class="line">      </span><br><span class="line">  <span class="comment">// 找出输入数组中最大值和最小值</span></span><br><span class="line">  <span class="keyword">var</span> max = <span class="built_in">Math</span>.max.apply(&#123;&#125;,arr);</span><br><span class="line">      min = <span class="built_in">Math</span>.min.apply(&#123;&#125;,arr);</span><br><span class="line">  <span class="comment">// 初始化桶数组，从最小值开始，到最大值结束</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = min; i &lt;= max; i++)&#123;</span><br><span class="line">    count[i] = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 遍历输入数组，填充count</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> j=<span class="number">0</span>; j &lt; len; j++)&#123;</span><br><span class="line">    count[arr[j]]++;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> k = <span class="number">0</span>; k &lt;= max; k++)&#123;</span><br><span class="line">    <span class="comment">// 按顺序将值推入输出数组，并将对应下标减1</span></span><br><span class="line">    <span class="keyword">while</span>(count[k]-- &gt; <span class="number">0</span>)&#123;</span><br><span class="line">      result.push(k);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">countSort([<span class="number">13</span>, <span class="number">44</span>, <span class="number">38</span>, <span class="number">26</span>, <span class="number">47</span>, <span class="number">15</span>, <span class="number">19</span>, <span class="number">26</span>, <span class="number">27</span>, <span class="number">15</span>, <span class="number">46</span>, <span class="number">14</span>, <span class="number">19</span>, <span class="number">50</span>, <span class="number">48</span>]);</span><br><span class="line"><span class="comment">// 输出[13, 14, 15, 15, 19, 19, 26, 26, 27, 38, 44, 46, 47, 48, 50]</span></span><br><span class="line">countSort([<span class="number">43</span>,<span class="number">41</span>,<span class="number">15</span>,<span class="number">13</span>,<span class="number">48</span>,<span class="number">13</span>,<span class="number">74</span>,<span class="number">35</span>,<span class="number">12</span>,<span class="number">62</span>,<span class="number">15</span>,<span class="number">45</span>]);</span><br><span class="line"><span class="comment">// 输出 [12, 13, 13, 15, 15, 35, 41, 43, 45, 48, 62, 74]</span></span><br></pre></td></tr></table></figure>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>计数排序就是简单的桶排序，一个桶代表数组中一个数出现的个数，所以需要一个和数组数字范围一样大的辅助数组，一般用在范围小于100的排序，时间复杂度为O(n)，空间复杂度为数组的数字范围。</p>
@@ -120,11 +120,11 @@
             <div>
               tags: 
   <li class="meta-text">
-  { <a href="/blog/tags/JavaScript/">JavaScript</a> }
+  { <a href="/tags/JavaScript/">JavaScript</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/blog/tags/算法/">算法</a> }
+  { <a href="/tags/算法/">算法</a> }
   </li>
 
 
@@ -162,7 +162,7 @@
         </div>
     </div>
 </div>
-<script src="/blog/js/pager/dist/singlepager.js"></script>
+<script src="/js/pager/dist/singlepager.js"></script>
 <!--<script>
 var sp = new Pager('data-pager-shell')
 </script>-->

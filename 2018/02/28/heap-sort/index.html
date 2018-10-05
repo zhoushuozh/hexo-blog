@@ -13,7 +13,7 @@
   
   <link rel="stylesheet" href="/blog/css/highlight_themes/tomorrow.css">
   
-  <link rel="stylesheet" href="/blog/css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
   
   <!-- global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111550549-1"></script>
@@ -32,8 +32,8 @@
 <body>
 <div class="Shell">
     <aside class='SideBar'>
-    <section class='avatar' style="background: #333 url(/blog/assets/header-bg2.jpg) no-repeat center; background-size:cover;">
-        <div class='av-pic' style="background-image: url(/blog/assets/logo.jpg)">
+    <section class='avatar' style="background: #333 url(/assets/header-bg2.jpg) no-repeat center; background-size:cover;">
+        <div class='av-pic' style="background-image: url(/assets/logo.jpg)">
         </div>
     </section>
     <section class='menu'>
@@ -41,19 +41,19 @@
         
         <ul>
           
-            <a href="/blog/" class="Btn">
+            <a href="/" class="Btn">
               <li>Home</li>
             </a>  
           
-            <a href="/blog/archives/" class="Btn">
+            <a href="/archives/" class="Btn">
               <li>Archive</li>
             </a>  
           
-            <a href="/blog/tags/" class="Btn">
+            <a href="/tags/" class="Btn">
               <li>Tags</li>
             </a>  
           
-            <a href="/blog/about/" class="Btn">
+            <a href="/about/" class="Btn">
               <li>About</li>
             </a>  
           
@@ -106,7 +106,7 @@
 <li>如果父节点小宇子节点时，交换父子內容再继续子节点和孙节点比较</li>
 <li>先将第一个元素和已排好元素前一位做交换，再从新调整，直到排序完毕</li>
 </ol>
-<h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><p><img src="https://blog.zhoushuo.me/heapsort.jpg" alt="堆排序流程图"></p>
+<h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><p><img src="https://cdn.zhoushuo.me/heapsort.jpg" alt="堆排序流程图"></p>
 <p>JavaScript代码实现<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">heapSort</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 交换函数</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">swap</span>(<span class="params">i, j</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> tmp = arr[i];</span><br><span class="line">        arr[i] = arr[j];</span><br><span class="line">        arr[j] = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">max_heapify</span>(<span class="params">start, end</span>) </span>&#123;</span><br><span class="line">        <span class="comment">//建立父节点下标和子节点下标</span></span><br><span class="line">        <span class="keyword">var</span> dad = start;</span><br><span class="line">        <span class="keyword">var</span> son = dad * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (son &gt;= end)<span class="comment">//若子节点下标超过范围直接跳出函数</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span> (son + <span class="number">1</span> &lt; end &amp;&amp; arr[son] &lt; arr[son + <span class="number">1</span>])<span class="comment">//先比较两个子节点大小，选择最大的</span></span><br><span class="line">            son++;</span><br><span class="line">        <span class="keyword">if</span> (arr[dad] &lt;= arr[son]) &#123;<span class="comment">//如果父节点小于子节点时，交换父子內容再继续子节点和孙节点比较</span></span><br><span class="line">            swap(dad, son);</span><br><span class="line">            max_heapify(son, end);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> len = arr.length;</span><br><span class="line">    <span class="comment">//初始化，i从最后一个父节点开始调整</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="built_in">Math</span>.floor(len / <span class="number">2</span>) - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        max_heapify(i, len);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 先将第一个元素和已排好元素前一位做交换，再从新调整，直到排序完毕</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = len - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        swap(<span class="number">0</span>, i);</span><br><span class="line">        max_heapify(<span class="number">0</span>, i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">heapSort([<span class="number">15</span>, <span class="number">23</span>, <span class="number">14</span>, <span class="number">26</span>, <span class="number">14</span>, <span class="number">85</span>, <span class="number">17</span>, <span class="number">12</span>, <span class="number">3</span>, <span class="number">18</span>, <span class="number">45</span>, <span class="number">96</span>, <span class="number">7</span>, <span class="number">74</span>, <span class="number">45</span>, <span class="number">15</span>, <span class="number">12</span>, <span class="number">26</span>, <span class="number">12</span>, <span class="number">53</span>]);</span><br><span class="line"><span class="comment">// 输出 [3, 7, 12, 12, 12, 14, 14, 15, 15, 17, 18, 23, 26, 26, 45, 45, 53, 74, 85, 96]</span></span><br></pre></td></tr></table></figure>
 <h3 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h3><ul>
@@ -132,11 +132,11 @@
             <div>
               tags: 
   <li class="meta-text">
-  { <a href="/blog/tags/JavaScript/">JavaScript</a> }
+  { <a href="/tags/JavaScript/">JavaScript</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/blog/tags/算法/">算法</a> }
+  { <a href="/tags/算法/">算法</a> }
   </li>
 
 
@@ -174,7 +174,7 @@
         </div>
     </div>
 </div>
-<script src="/blog/js/pager/dist/singlepager.js"></script>
+<script src="/js/pager/dist/singlepager.js"></script>
 <!--<script>
 var sp = new Pager('data-pager-shell')
 </script>-->

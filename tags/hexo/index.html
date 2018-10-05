@@ -13,7 +13,7 @@
   
   <link rel="stylesheet" href="/blog/css/highlight_themes/tomorrow.css">
   
-  <link rel="stylesheet" href="/blog/css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
   
   <!-- global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111550549-1"></script>
@@ -32,8 +32,8 @@
 <body>
 <div class="Shell">
     <aside class='SideBar'>
-    <section class='avatar' style="background: #333 url(/blog/assets/header-bg2.jpg) no-repeat center; background-size:cover;">
-        <div class='av-pic' style="background-image: url(/blog/assets/logo.jpg)">
+    <section class='avatar' style="background: #333 url(/assets/header-bg2.jpg) no-repeat center; background-size:cover;">
+        <div class='av-pic' style="background-image: url(/assets/logo.jpg)">
         </div>
     </section>
     <section class='menu'>
@@ -41,19 +41,19 @@
         
         <ul>
           
-            <a href="/blog/" class="Btn">
+            <a href="/" class="Btn">
               <li>Home</li>
             </a>  
           
-            <a href="/blog/archives/" class="Btn">
+            <a href="/archives/" class="Btn">
               <li>Archive</li>
             </a>  
           
-            <a href="/blog/tags/" class="Btn">
+            <a href="/tags/" class="Btn">
               <li>Tags</li>
             </a>  
           
-            <a href="/blog/about/" class="Btn">
+            <a href="/about/" class="Btn">
               <li>About</li>
             </a>  
           
@@ -90,7 +90,7 @@
     <header class="title">
       
         <h1>
-          <a href="/blog/2018/03/22/hexo-gitalk/">为博客添加Gitalk评论插件</a>
+          <a href="/2018/03/22/hexo-gitalk/">为博客添加Gitalk评论插件</a>
         </h1>
       
       <div class='ListMeta'>
@@ -102,15 +102,15 @@
   <ul>
     
   <li class="meta-text">
-  { <a href="/blog/tags/Gitalk/">Gitalk</a> }
+  { <a href="/tags/Gitalk/">Gitalk</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/blog/tags/MarkDown/">MarkDown</a> }
+  { <a href="/tags/MarkDown/">MarkDown</a> }
   </li>
 
   <li class="meta-text">
-  { <a href="/blog/tags/Hexo/">Hexo</a> }
+  { <a href="/tags/Hexo/">Hexo</a> }
   </li>
 
 
@@ -125,7 +125,7 @@
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前体验过畅言、来必力、gitalk等评论插件，体验最好的就是gitalk了。我目前用的<code>icalm</code>主题内置了 <a href="http://disqus.com/" target="_blank" rel="noopener">Disqus</a>评论插件，用着还行，但在国内的加载速度那个惨啊… 所以决定还是换回gitalk。</p>
         
           <div class="more-link">
-            <a href="/blog/2018/03/22/hexo-gitalk/#more">read more »</a>
+            <a href="/2018/03/22/hexo-gitalk/#more">read more »</a>
           </div>
         
       
@@ -148,7 +148,7 @@
         </div>
     </div>
 </div>
-<script src="/blog/js/pager/dist/singlepager.js"></script>
+<script src="/js/pager/dist/singlepager.js"></script>
 <!--<script>
 var sp = new Pager('data-pager-shell')
 </script>-->
@@ -168,6 +168,14 @@ var sp = new Pager('data-pager-shell')
         bp.src = 'http://push.zhanzhang.baidu.com/push.js';
     }
     var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+</body>
+</html>
+ByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
 })();
 </script>
