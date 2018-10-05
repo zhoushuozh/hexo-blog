@@ -11,15 +11,28 @@
   
   <link rel="shortcut icon" href="/blog/assets/favicon.ico" >
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow-night.min.css">
+  <link rel="stylesheet" href="/blog/css/highlight_themes/tomorrow.css">
   
   <link rel="stylesheet" href="/blog/css/style.css">
+  
+  <!-- global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111550549-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-111550549-1');
+</script>
+
+
+  
 </head>
 
 <body>
 <div class="Shell">
     <aside class='SideBar'>
-    <section class='avatar' style="background-image: url(/blog/assets/header.png)">
+    <section class='avatar' style="background: #333 url(/blog/assets/header-bg2.jpg) no-repeat center; background-size:cover;">
         <div class='av-pic' style="background-image: url(/blog/assets/logo.jpg)">
         </div>
     </section>
@@ -81,7 +94,7 @@
         </h1>
       
       <div class='ListMeta'>
-  <time datetime="2018-03-10T17:21:14.000Z" itemprop="datePublished">
+  <time datetime="2018-03-10T17:22:14.000Z" itemprop="datePublished">
     2018-03-11
   </time>
   
@@ -180,8 +193,7 @@
     <div>
       
         <p><code>&lt;canvas&gt;</code> 是HTML5新增的元素，可以用于绘制图形，制作照片，创建动画。<code>&lt;canvas&gt;</code> 标签只是图形容器，它没有自己的行为，必须使用脚本来绘制图形。</p>
-<h3 id="创建一个canvas"><a href="#创建一个canvas" class="headerlink" title="创建一个canvas"></a>创建一个canvas</h3><pre><code class="HTML">&lt;canvas id=&quot;mycanvas&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;&lt;/canvas&gt;
-</code></pre>
+<h3 id="创建一个canvas"><a href="#创建一个canvas" class="headerlink" title="创建一个canvas"></a>创建一个canvas</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"mycanvas"</span> <span class="attr">width</span>=<span class="string">"300"</span> <span class="attr">height</span>=<span class="string">"300"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
         
           <div class="more-link">
             <a href="/blog/2018/03/05/html5-canvas/#more">read more »</a>
@@ -200,17 +212,37 @@
             <footer>
     <div>&copy; 2018 - 周硕 </div>
     <div>
-    Powered by Hexo &nbsp; Theme by icalm
+    Powered by Hexo &nbsp; Theme icalm
     </div>
 </footer>
+
         </div>
     </div>
 </div>
 <script src="/blog/js/pager/dist/singlepager.js"></script>
-<script>
+<!--<script>
 var sp = new Pager('data-pager-shell')
+</script>-->
+
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>-->
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
 </script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-<!--<script>hljs.initHighlightingOnLoad();</script>-->
+
+
 </body>
 </html>

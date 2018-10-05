@@ -11,15 +11,28 @@
   
   <link rel="shortcut icon" href="/blog/assets/favicon.ico" >
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow-night.min.css">
+  <link rel="stylesheet" href="/blog/css/highlight_themes/tomorrow.css">
   
   <link rel="stylesheet" href="/blog/css/style.css">
+  
+  <!-- global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111550549-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-111550549-1');
+</script>
+
+
+  
 </head>
 
 <body>
 <div class="Shell">
     <aside class='SideBar'>
-    <section class='avatar' style="background-image: url(/blog/assets/header.png)">
+    <section class='avatar' style="background: #333 url(/blog/assets/header-bg2.jpg) no-repeat center; background-size:cover;">
         <div class='av-pic' style="background-image: url(/blog/assets/logo.jpg)">
         </div>
     </section>
@@ -73,37 +86,16 @@
 
     <section>
       <p><code>&lt;canvas&gt;</code> 是HTML5新增的元素，可以用于绘制图形，制作照片，创建动画。<code>&lt;canvas&gt;</code> 标签只是图形容器，它没有自己的行为，必须使用脚本来绘制图形。</p>
-<h3 id="创建一个canvas"><a href="#创建一个canvas" class="headerlink" title="创建一个canvas"></a>创建一个canvas</h3><pre><code class="HTML">&lt;canvas id=&quot;mycanvas&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;&lt;/canvas&gt;
-</code></pre>
+<h3 id="创建一个canvas"><a href="#创建一个canvas" class="headerlink" title="创建一个canvas"></a>创建一个canvas</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"mycanvas"</span> <span class="attr">width</span>=<span class="string">"300"</span> <span class="attr">height</span>=<span class="string">"300"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p><code>&lt;canvas&gt;</code>标签只有两个属性—— <code>width</code>和<code>height</code>，当没有设置宽度和高度的时候，<code>&lt;canvas&gt;</code> 的默认大小为300px×150px。需要注意的是，如果使用<code>css</code>来定义<code>&lt;canvas&gt;</code>的大小，在绘制时图像会伸缩以适应它的框架尺寸：如果CSS的尺寸与初始画布的比例不一致，它会出现扭曲。</p>
 <h3 id="渲染上下文"><a href="#渲染上下文" class="headerlink" title="渲染上下文"></a>渲染上下文</h3><p><code>&lt;canvas&gt;</code>元素本身是没有绘图能力的。所有的绘制工作必须在 JavaScript 内部完成。</p>
 <p><code>&lt;canvas&gt;</code>创造了一个固定大小的画布，它公开了一个或多个渲染上下文，其可以用来绘制和处理要展示的内容。</p>
-<p>canvas起初是空白的，首先需要找到渲染上下文，然后在它的上面绘制。</p>
-<pre><code class="JavaScript">var canvas=document.getElementById(&quot;mycanvas&quot;);
-var ctx = canvas.getContext(&#39;2d&#39;);
-</code></pre>
+<p>canvas起初是空白的，首先需要找到渲染上下文，然后在它的上面绘制。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">"mycanvas"</span>);</span><br><span class="line"><span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br></pre></td></tr></table></figure></p>
 <p><code>&lt;canvas&gt;</code>有一个叫做 <code>getContext()</code>的方法，这个方法是用来获得渲染上下文和它的绘画功能。<code>getContext()</code>只有一个参数，就是上下文的格式。</p>
-<h3 id="检查浏览器兼容性"><a href="#检查浏览器兼容性" class="headerlink" title="检查浏览器兼容性"></a>检查浏览器兼容性</h3><p>最新版的 FireFox，Safari，Chrome 和 Opera 都支持 HTML5 <code>canvas</code>，但是 IE8及以下都不支持<code>canvas</code>。下面的代码用于检测浏览器的是否支持<code>canvas</code></p>
-<pre><code class="JavaScript">var canvas = document.getElementById(&#39;mycanvas&#39;); 
-
-if (canvas.getContext){
-    var ctx = canvas.getContext(&#39;2d&#39;);
-    // drawing code here
-} else {
-    // canvas-unsupported code here
-}
-</code></pre>
+<h3 id="检查浏览器兼容性"><a href="#检查浏览器兼容性" class="headerlink" title="检查浏览器兼容性"></a>检查浏览器兼容性</h3><p>最新版的 FireFox，Safari，Chrome 和 Opera 都支持 HTML5 <code>canvas</code>，但是 IE8及以下都不支持<code>canvas</code>。下面的代码用于检测浏览器的是否支持<code>canvas</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'mycanvas'</span>); </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (canvas.getContext)&#123;</span><br><span class="line">    <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">    <span class="comment">// drawing code here</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// canvas-unsupported code here</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="canvas-坐标"><a href="#canvas-坐标" class="headerlink" title="canvas 坐标"></a>canvas 坐标</h3><p>在绘制图形之前，我们还应该先了解一下<code>canvas</code>中的坐标。<code>canvas</code>默认被网格所覆盖。通常来说网格中的一个单元相当于<code>canvas</code>元素中的一像素。栅格的起点为左上角（坐标为（0,0））。所有元素的位置都相对于原点定位。</p>
-<h3 id="绘制-canvas-图形"><a href="#绘制-canvas-图形" class="headerlink" title="绘制 canvas 图形"></a>绘制 canvas 图形</h3><p>好的，接下来我们就开始了解怎么使用Canvas的API绘制基本图形了 。</p>
-<pre><code class="JavaScript">var canvas = document.getElementById(&#39;mycanvas&#39;); 
-
-if (canvas.getContext){
-    var ctx = canvas.getContext(&#39;2d&#39;);
-    ctx.fillStyle=&quot;red&quot;;
-    ctx.fillRect(0,0,100,100);
-}
-</code></pre>
+<h3 id="绘制-canvas-图形"><a href="#绘制-canvas-图形" class="headerlink" title="绘制 canvas 图形"></a>绘制 canvas 图形</h3><p>好的，接下来我们就开始了解怎么使用Canvas的API绘制基本图形了 。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'mycanvas'</span>); </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (canvas.getContext)&#123;</span><br><span class="line">    <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">    ctx.fillStyle=<span class="string">"red"</span>;</span><br><span class="line">    ctx.fillRect(<span class="number">0</span>,<span class="number">0</span>,<span class="number">100</span>,<span class="number">100</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>上面的两行代码绘制一个红色的矩形：</p>
 <p>设置<code>fillStyle</code>属性可以是<code>css</code>颜色，渐变，或图案。<code>fillStyle</code>默认设置是<code>#000000</code>（黑色）。</p>
 <p><code>fillRect(x,y,width,height)</code>方法定义了矩形当前的填充方式，<code>x</code>与<code>y</code>指定了在<code>canvas</code>画布上所绘制的矩形的左上角（相对于原点）的坐标。<code>width</code>和<code>height</code>设置矩形的尺寸。</p>
@@ -148,51 +140,19 @@ if (canvas.getContext){
 </table>
 <p>这里需要注意的是，当你调用fill()函数时，所有没有闭合的形状都会自动闭合，所以你不需要调用closePath()函数。但是调用stroke()时不会自动闭合。</p>
 <p>下面的代码绘制了一个三角形：</p>
-<pre><code class="JavaScript">function draw() {
- var canvas = document.getElementById(&#39;canvas&#39;);
-     if (canvas.getContext){
-        var ctx = canvas.getContext(&#39;2d&#39;);
-        ctx.beginPath();
-        ctx.moveTo(75,50);
-        ctx.lineTo(100,75);
-        ctx.lineTo(100,25);
-        ctx.fill();
-    }
-}
-</code></pre>
-<h3 id="canvas-圆弧"><a href="#canvas-圆弧" class="headerlink" title="canvas 圆弧"></a>canvas 圆弧</h3><p>绘制路径我们可以使用<code>arc()</code>方法。该方法有六个参数：<code>x,y</code>为绘制圆弧所在圆上的圆心坐标。<code>radius</code>为半径。<code>startAngle</code>以及<code>endAngle</code>参数用弧度定义了开始以及结束的弧度。这些都是以x轴为基准。参数<code>anticlockwise</code>为一个布尔值。为<code>true</code>时，是逆时针方向，否则顺时针方向。</p>
-<pre><code class="JavaScript">var canvas=document.getElementById(&quot;mycanvas&quot;);
-var ctx=canvas.getContext(&quot;2d&quot;);
-ctx.beginPath();
-ctx.arc(95,50,40,0,2*Math.PI);
-ctx.stroke();
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span><br><span class="line">     <span class="keyword">if</span> (canvas.getContext)&#123;</span><br><span class="line">        <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">        ctx.beginPath();</span><br><span class="line">        ctx.moveTo(<span class="number">75</span>,<span class="number">50</span>);</span><br><span class="line">        ctx.lineTo(<span class="number">100</span>,<span class="number">75</span>);</span><br><span class="line">        ctx.lineTo(<span class="number">100</span>,<span class="number">25</span>);</span><br><span class="line">        ctx.fill();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="canvas-圆弧"><a href="#canvas-圆弧" class="headerlink" title="canvas 圆弧"></a>canvas 圆弧</h3><p>绘制路径我们可以使用<code>arc()</code>方法。该方法有六个参数：<code>x,y</code>为绘制圆弧所在圆上的圆心坐标。<code>radius</code>为半径。<code>startAngle</code>以及<code>endAngle</code>参数用弧度定义了开始以及结束的弧度。这些都是以x轴为基准。参数<code>anticlockwise</code>为一个布尔值。为<code>true</code>时，是逆时针方向，否则顺时针方向。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">"mycanvas"</span>);</span><br><span class="line"><span class="keyword">var</span> ctx=canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line">ctx.beginPath();</span><br><span class="line">ctx.arc(<span class="number">95</span>,<span class="number">50</span>,<span class="number">40</span>,<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">Math</span>.PI);</span><br><span class="line">ctx.stroke();</span><br></pre></td></tr></table></figure></p>
 <p>注意：arc()函数中的角度单位是弧度，不是度数。角度与弧度的js表达式:radians=(Math.PI/180)*degrees。</p>
 <h3 id="canvas-文本"><a href="#canvas-文本" class="headerlink" title="canvas 文本"></a>canvas 文本</h3><p>canvas 提供了两种方法来渲染文本：</p>
 <p><code>fillText(text, x, y [, maxWidth])</code> 在指定的(x,y)位置填充指定的文本，绘制的最大宽度是可选的。</p>
-<p><code>strokeText(text, x, y [, maxWidth])</code> 在指定的(x,y)位置绘制文本边框，绘制的最大宽度是可选的。<br>文本被填充方式：</p>
-<pre><code class="JavaScript">var canvas=document.getElementById(&quot;mycanvas&quot;);
-var ctx=canvas.getContext(&quot;2d&quot;);
-ctx.font=&quot;30px Arial&quot;;
-ctx.fillText(&quot;Hello World&quot;,10,50);
-</code></pre>
-<p>文本边框备绘制方式：</p>
-<pre><code class="JavaScript">var canvas=document.getElementById(&quot;mycanvas&quot;);
-var ctx=canvas.getContext(&quot;2d&quot;);
-ctx.font=&quot;30px Arial&quot;;
-ctx.strkeText(&quot;Hello World&quot;,10,50);
-</code></pre>
+<p><code>strokeText(text, x, y [, maxWidth])</code> 在指定的(x,y)位置绘制文本边框，绘制的最大宽度是可选的。<br>文本被填充方式：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">"mycanvas"</span>);</span><br><span class="line"><span class="keyword">var</span> ctx=canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line">ctx.font=<span class="string">"30px Arial"</span>;</span><br><span class="line">ctx.fillText(<span class="string">"Hello World"</span>,<span class="number">10</span>,<span class="number">50</span>);</span><br></pre></td></tr></table></figure></p>
+<p>文本边框备绘制方式：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">"mycanvas"</span>);</span><br><span class="line"><span class="keyword">var</span> ctx=canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line">ctx.font=<span class="string">"30px Arial"</span>;</span><br><span class="line">ctx.strkeText(<span class="string">"Hello World"</span>,<span class="number">10</span>,<span class="number">50</span>);</span><br></pre></td></tr></table></figure></p>
 <h3 id="canvas-图像"><a href="#canvas-图像" class="headerlink" title="canvas 图像"></a>canvas 图像</h3><p>引入图像到<code>canvas</code>里需要以下两步基本操作：</p>
 <ol>
 <li>获取一个指向<code>HTMLImageElement</code>的对象或者另一个<code>canvas</code>元素的引用作为源，也可以通过提供一个URL的方式来使用图片。</li>
 <li>使用<code>drawImage()</code>函数将图片绘制到画布上。</li>
 </ol>
-<p>获取图片和绘制图片，下面只展示最简单的一种：</p>
-<pre><code class="JavaScript">var canvas=document.getElementById(&quot;mycanvas&quot;);
-var ctx=canvas.getContext(&quot;2d&quot;);
-var img=document.getElementById(&quot;img&quot;);
-ctx.drawImage(img,10,10);
-</code></pre>
+<p>获取图片和绘制图片，下面只展示最简单的一种：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">"mycanvas"</span>);</span><br><span class="line"><span class="keyword">var</span> ctx=canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line"><span class="keyword">var</span> img=<span class="built_in">document</span>.getElementById(<span class="string">"img"</span>);</span><br><span class="line">ctx.drawImage(img,<span class="number">10</span>,<span class="number">10</span>);</span><br></pre></td></tr></table></figure></p>
 <p><code>drawImage</code>有三个参数：<code>drawImage(image, x, y)</code>。其中<code>image</code>是<code>image</code>或者 <code>canvas</code>对象，<code>x</code>和<code>y</code>是其在目标<code>canvas</code>里的起始坐标。</p>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>今天已经很晚了，关于<code>canvas</code>暂时就先讲到这里，以上就是关于canvas的基础功能的一些介绍。</p>
 
@@ -251,17 +211,37 @@ ctx.drawImage(img,10,10);
             <footer>
     <div>&copy; 2018 - 周硕 </div>
     <div>
-    Powered by Hexo &nbsp; Theme by icalm
+    Powered by Hexo &nbsp; Theme icalm
     </div>
 </footer>
+
         </div>
     </div>
 </div>
 <script src="/blog/js/pager/dist/singlepager.js"></script>
-<script>
+<!--<script>
 var sp = new Pager('data-pager-shell')
+</script>-->
+
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>-->
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
 </script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-<!--<script>hljs.initHighlightingOnLoad();</script>-->
+
+
 </body>
 </html>

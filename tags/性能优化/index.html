@@ -11,15 +11,28 @@
   
   <link rel="shortcut icon" href="/blog/assets/favicon.ico" >
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow-night.min.css">
+  <link rel="stylesheet" href="/blog/css/highlight_themes/tomorrow.css">
   
   <link rel="stylesheet" href="/blog/css/style.css">
+  
+  <!-- global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111550549-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-111550549-1');
+</script>
+
+
+  
 </head>
 
 <body>
 <div class="Shell">
     <aside class='SideBar'>
-    <section class='avatar' style="background-image: url(/blog/assets/header.png)">
+    <section class='avatar' style="background: #333 url(/blog/assets/header-bg2.jpg) no-repeat center; background-size:cover;">
         <div class='av-pic' style="background-image: url(/blog/assets/logo.jpg)">
         </div>
     </section>
@@ -71,6 +84,57 @@
         <h1>{ 性能优化 }</h1>
     </header>
   
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/blog/2018/06/22/cookie-session-http-cache/">关于cookie、session和HTTP缓存</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2018-06-22T14:18:26.000Z" itemprop="datePublished">
+    2018-06-22
+  </time>
+  
+  | 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/blog/tags/性能优化/">性能优化</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/blog/tags/HTTP/">HTTP</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/blog/tags/web缓存/">web缓存</a> }
+  </li>
+
+
+  </ul>
+  
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><h3 id="Cookie是什么"><a href="#Cookie是什么" class="headerlink" title="Cookie是什么"></a>Cookie是什么</h3><blockquote>
+<p>HTTP Cookie（也叫Web Cookie或浏览器Cookie）是服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器下次向同一服务器再发起请求时被携带并发送到服务器上。 </p>
+</blockquote>
+        
+          <div class="more-link">
+            <a href="/blog/2018/06/22/cookie-session-http-cache/#more">read more »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
   
     <li>
       <article class='ListView'>
@@ -134,17 +198,37 @@
             <footer>
     <div>&copy; 2018 - 周硕 </div>
     <div>
-    Powered by Hexo &nbsp; Theme by icalm
+    Powered by Hexo &nbsp; Theme icalm
     </div>
 </footer>
+
         </div>
     </div>
 </div>
 <script src="/blog/js/pager/dist/singlepager.js"></script>
-<script>
+<!--<script>
 var sp = new Pager('data-pager-shell')
+</script>-->
+
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>-->
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
 </script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-<!--<script>hljs.initHighlightingOnLoad();</script>-->
+
+
 </body>
 </html>

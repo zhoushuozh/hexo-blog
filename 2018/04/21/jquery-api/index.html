@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="keywords" content="周硕的博客, 前端博客">
+  <meta name="description" content="周硕的个人博客，此博客是我记录工作和学习的地方。">
+  <title>简单实现 jQuery 中的几个 API | 周硕的博客</title>
+  
+  
+  <link rel="shortcut icon" href="/blog/assets/favicon.ico" >
+  
+  <link rel="stylesheet" href="/blog/css/highlight_themes/tomorrow.css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+  
+  <!-- global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111550549-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-111550549-1');
+</script>
+
+
+  
+</head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background: #333 url(/blog/assets/header-bg2.jpg) no-repeat center; background-size:cover;">
+        <div class='av-pic' style="background-image: url(/blog/assets/logo.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>周硕的博客</div>
+        
+        <ul>
+          
+            <a href="/blog/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/blog/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/blog/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/blog/about/" class="Btn">
+              <li>About</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+            
+                <a href="https://github.com/zhoushuozh/">
+                    <img src="/blog/assets/github.svg" />
+                </a>
+            
+        
+            
+                <a href="https://weibo.com/zhoushuozh/">
+                    <img src="/blog/assets/weibo.svg" />
+                </a>
+            
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>简单实现 jQuery 中的几个 API</h1>
+    </header>
+
+    <section>
+      <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>对于操作 DOM 来说，jQuery 是非常方便的一个库，虽然如今随着 React, Vue 之类框架的流行，jQuery 用得越来越少了，但是其中很多思想还是非常值得我们学习的，这篇文章将介绍如何实现 jQuery 中的几个 api 。</p>
+<a id="more"></a>
+<h3 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h3><p>首先说一下要实现 API ：</p>
+<ol>
+<li>$()：根据选择器构造一个 jQuery 对象</li>
+<li>addClass()：为每个匹配的元素添加指定的样式类名</li>
+<li>text()：获取匹配元素集合中每个元素的合并文本，设置匹配元素集合中每个元素的文本内容为指定的文本内容。</li>
+<li>css()：获取匹配元素集合中的第一个元素的样式属性的值设置每个匹配元素的一个或多个CSS属性。</li>
+</ol>
+<h2 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h2><h3 id="构造-jQuery-对象"><a href="#构造-jQuery-对象" class="headerlink" title="构造 jQuery 对象"></a>构造 jQuery 对象</h3><p>接受一个 node 或选择器，构造并返回一个类数组对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params">selector</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> nodes = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> selector === <span class="string">'string'</span>)&#123;</span><br><span class="line">        <span class="comment">// 利用temp去掉多余的原型，直接指向object.prototype</span></span><br><span class="line">        <span class="keyword">let</span> temp = <span class="built_in">document</span>.querySelectorAll(selector)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;temp.length; i++)&#123;</span><br><span class="line">            nodes[i] = temp[i] </span><br><span class="line">        &#125;</span><br><span class="line">        nodes.length = temp.length</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(selector <span class="keyword">instanceof</span> Node)&#123;</span><br><span class="line">        nodes = &#123;</span><br><span class="line">            <span class="number">0</span>: selector, </span><br><span class="line">            length:<span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> nodes</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="addClass"><a href="#addClass" class="headerlink" title="addClass"></a>addClass</h3><p>接受一个或多个 class ，遍历每个元素，为元素添加 class 。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addClass</span>(<span class="params">className</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;nodes.length; i++)&#123;</span><br><span class="line">        nodes[i].classList.add(className)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="text"><a href="#text" class="headerlink" title="text"></a>text</h3><p>如果有接受参数，则为所有匹配元素设置文本内容；如果没有接受参数，则返回所有匹配元素文本的集合。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">text</span>(<span class="params">content</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(content === <span class="literal">undefined</span>)&#123;</span><br><span class="line">        <span class="keyword">let</span> texts = []</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;nodes.length; i++)&#123;</span><br><span class="line">            texts.push(nodes[i].textContent)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> texts</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;nodes.length; i++)&#123;</span><br><span class="line">            nodes[i].textContent = content</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="css"><a href="#css" class="headerlink" title="css"></a>css</h3><p>css() 接受<code>propertyname</code>和 <code>value</code>两个参数，遍历所有匹配元素，设置指定的 css 属性；如果 <code>value</code>为空，并且<code>propertyname</code>为<code>string</code>，则返回第一个元素指定的 css 属性值；如果<code>propertyname</code>为<code>object</code>，如<code>{&quot;propertyname&quot;:&quot;value&quot;,&quot;propertyname&quot;:&quot;value&quot;,...}</code>，则遍历所有匹配元素和<code>propertyname</code>，设置指定的 css 属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">css</span>(<span class="params">propertyname,value</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(value === <span class="literal">undefined</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">typeof</span> propertyname === <span class="string">'string'</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">window</span>.getComputedStyle(nodes[<span class="number">0</span>],<span class="literal">null</span>).getPropertyValue(propertyname)</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">typeof</span> propertyname === <span class="string">'object'</span>)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;nodes.length; i++)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">let</span> style <span class="keyword">in</span> propertyname)&#123;</span><br><span class="line">                    nodes[i].setAttribute(<span class="string">'style'</span>, style+<span class="string">":"</span>+propertyname[style])</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;nodes.length; i++)&#123;</span><br><span class="line">            nodes[i].setAttribute(<span class="string">'style'</span>,propertyname+<span class="string">":"</span>+value)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>最终代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.jQuery = <span class="function"><span class="keyword">function</span>(<span class="params">selector</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> nodes = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> selector === <span class="string">'string'</span>)&#123;</span><br><span class="line">        <span class="keyword">let</span> temp = <span class="built_in">document</span>.querySelectorAll(selector)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;temp.length; i++)&#123;</span><br><span class="line">            nodes[i] = temp[i] </span><br><span class="line">        &#125;</span><br><span class="line">        nodes.length = temp.length</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(selector <span class="keyword">instanceof</span> Node)&#123;</span><br><span class="line">        nodes = &#123;</span><br><span class="line">            <span class="number">0</span>: selector, </span><br><span class="line">            length:<span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    nodes.addClass = <span class="function"><span class="keyword">function</span>(<span class="params">className</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;nodes.length; i++)&#123;</span><br><span class="line">            nodes[i].classList.add(className)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    nodes.text = <span class="function"><span class="keyword">function</span>(<span class="params">content</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(content === <span class="literal">undefined</span>)&#123;</span><br><span class="line">            <span class="keyword">let</span> texts = []</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;nodes.length; i++)&#123;</span><br><span class="line">                texts.push(nodes[i].textContent)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> texts</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;nodes.length; i++)&#123;</span><br><span class="line">                nodes[i].textContent = content</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    nodes.css = <span class="function"><span class="keyword">function</span>(<span class="params">propertyname,value</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(value === <span class="literal">undefined</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">typeof</span> propertyname === <span class="string">'string'</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">window</span>.getComputedStyle(nodes[<span class="number">0</span>],<span class="literal">null</span>).getPropertyValue(propertyname)</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">typeof</span> propertyname === <span class="string">'object'</span>)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;nodes.length; i++)&#123;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">let</span> style <span class="keyword">in</span> propertyname)&#123;</span><br><span class="line">                        nodes[i].setAttribute(<span class="string">'style'</span>, style+<span class="string">":"</span>+propertyname[style])</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;nodes.length; i++)&#123;</span><br><span class="line">                nodes[i].setAttribute(<span class="string">'style'</span>,propertyname+<span class="string">":"</span>+value)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> nodes</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.$ = jQuery</span><br></pre></td></tr></table></figure>
+<h2 id="效果测试"><a href="#效果测试" class="headerlink" title="效果测试"></a>效果测试</h2><p>下面的代码是获取 id 为 <code>wraper</code>下 class 为<code>item</code>的元素，设置文本内容为 hello ，并添加 <code>font-size:20px</code>的 css 样式，最后添加 class <code>red</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#wraper &gt; .item"</span>).text(<span class="string">"hello"</span>).css(<span class="string">"font-size"</span>,<span class="string">"20px"</span>).addClass(<span class="string">"red"</span>)</span><br></pre></td></tr></table></figure>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2018-04-20T17:05:19.000Z" itemprop="datePublished">
+              2018-04-21
+            </time>
+          </div>
+          
+            <div>
+              tags: 
+  <li class="meta-text">
+  { <a href="/blog/tags/JavaScript/">JavaScript</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/blog/tags/jQuery/">jQuery</a> }
+  </li>
+
+
+            </div>
+          
+      </section>
+    
+     
+</article>
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk-container"></div>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'd50f82d1de5ab2dd34c6',
+        clientSecret: '7ed79e0b3ad122582d5c8d7d5a295c1142743477',
+        id: window.location.pathname,
+        repo: 'comments',
+        owner: 'zhoushuozh',
+        admin: 'zhoushuozh'
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+</div>
+
+            <footer>
+    <div>&copy; 2018 - 周硕 </div>
+    <div>
+    Powered by Hexo &nbsp; Theme icalm
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+<script src="/blog/js/pager/dist/singlepager.js"></script>
+<!--<script>
+var sp = new Pager('data-pager-shell')
+</script>-->
+
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>-->
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+</body>
+</html>

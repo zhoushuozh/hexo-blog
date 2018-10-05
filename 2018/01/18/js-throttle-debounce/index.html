@@ -11,15 +11,28 @@
   
   <link rel="shortcut icon" href="/blog/assets/favicon.ico" >
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow-night.min.css">
+  <link rel="stylesheet" href="/blog/css/highlight_themes/tomorrow.css">
   
   <link rel="stylesheet" href="/blog/css/style.css">
+  
+  <!-- global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111550549-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-111550549-1');
+</script>
+
+
+  
 </head>
 
 <body>
 <div class="Shell">
     <aside class='SideBar'>
-    <section class='avatar' style="background-image: url(/blog/assets/header.png)">
+    <section class='avatar' style="background: #333 url(/blog/assets/header-bg2.jpg) no-repeat center; background-size:cover;">
         <div class='av-pic' style="background-image: url(/blog/assets/logo.jpg)">
         </div>
     </section>
@@ -75,34 +88,8 @@
       <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在浏览器 DOM 事件里面，有一些事件会随着用户的操作不间断触发。如：改变窗口大小（resize）、鼠标滚动（scroll）、鼠标移动（mousemove），如果把逻辑函数直接绑定到这些事件上，会严重影响性能，再比如把ajax请求直接绑定到keydown事件上，将在用户输入时产生频率很高的ajax请求，给服务器造成不必要的响应压力。</p>
 <a id="more"></a>
 <h3 id="函数节流-throttle"><a href="#函数节流-throttle" class="headerlink" title="函数节流 (throttle)"></a>函数节流 (throttle)</h3><p>每间隔某个时间去执行某函数，避免函数的过多执行，这个方式就叫函数节流。即设定一个时间间隔，当时间间隔大于或等于时，立即执行一次方法。</p>
-<pre><code class="js">function throttle(fn, delta, context) {
-    var safe = true;
-    return function() {
-        var args = arguments;
-        if(safe) {
-            fn.call(context, args)
-            safe = false
-            setTimeout(function() {
-                safe = true
-            }, delta)
-        }
-    }
-}
-</code></pre>
-<h3 id="函数防抖-debounce"><a href="#函数防抖-debounce" class="headerlink" title="函数防抖 (debounce)"></a>函数防抖 (debounce)</h3><p>固定的时间间隔内，如果事件再次被触发，则重置时间，直到大于等于时间间隔才执行方法。</p>
-<pre><code class="js">function debounce(fn, delta, context) {
-    var timeoutID = null;
-    return function() {
-        if(timeoutID) {
-        clearTimeout(timeoutID);
-    }
-    var args = arguments;
-    timeoutID = setTimeout(function() {
-            fn.apply(context, args);
-        }, delta);
-    }
-}
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn, delta, context</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> safe = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">        <span class="keyword">if</span>(safe) &#123;</span><br><span class="line">            fn.call(context, args)</span><br><span class="line">            safe = <span class="literal">false</span></span><br><span class="line">            setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                safe = <span class="literal">true</span></span><br><span class="line">            &#125;, delta)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="函数防抖-debounce"><a href="#函数防抖-debounce" class="headerlink" title="函数防抖 (debounce)"></a>函数防抖 (debounce)</h3><p>固定的时间间隔内，如果事件再次被触发，则重置时间，直到大于等于时间间隔才执行方法。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, delta, context</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> timeoutID = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(timeoutID) &#123;</span><br><span class="line">        clearTimeout(timeoutID);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">    timeoutID = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            fn.apply(context, args);</span><br><span class="line">        &#125;, delta);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>throttle：一辆定时的地铁，每五分钟出发一辆，不管你有没有上到车，只要命令下来过五分钟之后就出发。</p>
 <p>debounce：就跟电梯的原理一样，只要10s之内有人来就重置时间，再过10s，直到大于等于10s之后没人进来才出发。</p>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>函数节流(throttle)和函数防抖(debounce)都是通过延时逻辑操作来提升性能的方法，在前端优化中是常见且重要的解决方式。可以从概念和实际应用中理解两者的区别，在需要的时候选择合适的方法处理。</p>
@@ -158,17 +145,37 @@
             <footer>
     <div>&copy; 2018 - 周硕 </div>
     <div>
-    Powered by Hexo &nbsp; Theme by icalm
+    Powered by Hexo &nbsp; Theme icalm
     </div>
 </footer>
+
         </div>
     </div>
 </div>
 <script src="/blog/js/pager/dist/singlepager.js"></script>
-<script>
+<!--<script>
 var sp = new Pager('data-pager-shell')
+</script>-->
+
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>-->
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
 </script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-<!--<script>hljs.initHighlightingOnLoad();</script>-->
+
+
 </body>
 </html>

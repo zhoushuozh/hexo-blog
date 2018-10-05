@@ -11,15 +11,28 @@
   
   <link rel="shortcut icon" href="/blog/assets/favicon.ico" >
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow-night.min.css">
+  <link rel="stylesheet" href="/blog/css/highlight_themes/tomorrow.css">
   
   <link rel="stylesheet" href="/blog/css/style.css">
+  
+  <!-- global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111550549-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-111550549-1');
+</script>
+
+
+  
 </head>
 
 <body>
 <div class="Shell">
     <aside class='SideBar'>
-    <section class='avatar' style="background-image: url(/blog/assets/header.png)">
+    <section class='avatar' style="background: #333 url(/blog/assets/header-bg2.jpg) no-repeat center; background-size:cover;">
         <div class='av-pic' style="background-image: url(/blog/assets/logo.jpg)">
         </div>
     </section>
@@ -154,17 +167,37 @@
             <footer>
     <div>&copy; 2018 - 周硕 </div>
     <div>
-    Powered by Hexo &nbsp; Theme by icalm
+    Powered by Hexo &nbsp; Theme icalm
     </div>
 </footer>
+
         </div>
     </div>
 </div>
 <script src="/blog/js/pager/dist/singlepager.js"></script>
-<script>
+<!--<script>
 var sp = new Pager('data-pager-shell')
+</script>-->
+
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>-->
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
 </script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-<!--<script>hljs.initHighlightingOnLoad();</script>-->
+
+
 </body>
 </html>

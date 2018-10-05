@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="keywords" content="周硕的博客, 前端博客">
+  <meta name="description" content="周硕的个人博客，此博客是我记录工作和学习的地方。">
+  <title>理解JS中的闭包 | 周硕的博客</title>
+  
+  
+  <link rel="shortcut icon" href="/blog/assets/favicon.ico" >
+  
+  <link rel="stylesheet" href="/blog/css/highlight_themes/tomorrow.css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+  
+  <!-- global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111550549-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-111550549-1');
+</script>
+
+
+  
+</head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background: #333 url(/blog/assets/header-bg2.jpg) no-repeat center; background-size:cover;">
+        <div class='av-pic' style="background-image: url(/blog/assets/logo.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>周硕的博客</div>
+        
+        <ul>
+          
+            <a href="/blog/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/blog/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/blog/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/blog/about/" class="Btn">
+              <li>About</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+            
+                <a href="https://github.com/zhoushuozh/">
+                    <img src="/blog/assets/github.svg" />
+                </a>
+            
+        
+            
+                <a href="https://weibo.com/zhoushuozh/">
+                    <img src="/blog/assets/weibo.svg" />
+                </a>
+            
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>理解JS中的闭包</h1>
+    </header>
+
+    <section>
+      <h2 id="什么是闭包"><a href="#什么是闭包" class="headerlink" title="什么是闭包"></a>什么是闭包</h2><p>简单来说，闭包就是能够读取其他函数内部变量的函数。</p>
+<a id="more"></a>
+<p>如果出于种种原因，需要得到函数内的局部变量。正常情况下，这是办不到的，只有通过变通方法才能实现。那就是在函数的内部，再定义一个函数。</p>
+<p>由于在Javascript语言中，只有函数内部的子函数才能读取局部变量，因此可以把闭包简单理解成”定义在一个函数内部的函数”。</p>
+<p>所以，在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> n=<span class="number">123</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(n); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> result = f1();</span><br><span class="line">result();   <span class="comment">// 123</span></span><br></pre></td></tr></table></figure>
+<p>上面代码中函数 <code>f2</code> 就是闭包，即能够读取其他函数内部变量的函数。</p>
+<h2 id="闭包的用途"><a href="#闭包的用途" class="headerlink" title="闭包的用途"></a>闭包的用途</h2><p>闭包可以用在许多地方。它的最大用处有两个，一个是前面提到的可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">increased</span>(<span class="params">start</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> start++;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> inc = increased(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">inc() <span class="comment">// 5</span></span><br><span class="line">inc() <span class="comment">// 6</span></span><br><span class="line">inc() <span class="comment">// 7</span></span><br></pre></td></tr></table></figure>
+<p>上面代码中，<code>start</code> 是函数 <code>incrementor</code> 的内部变量。通过闭包，<code>start</code> 的状态被保留了，每一次调用都是在上一次调用的基础上进行计算。</p>
+<p>闭包的另一个用处，是封装对象的私有属性和私有方法。</p>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2018-05-19T06:51:03.000Z" itemprop="datePublished">
+              2018-05-19
+            </time>
+          </div>
+          
+            <div>
+              tags: 
+  <li class="meta-text">
+  { <a href="/blog/tags/JavaScript/">JavaScript</a> }
+  </li>
+
+
+            </div>
+          
+      </section>
+    
+     
+</article>
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<div id="gitalk-container"></div>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'd50f82d1de5ab2dd34c6',
+        clientSecret: '7ed79e0b3ad122582d5c8d7d5a295c1142743477',
+        id: window.location.pathname,
+        repo: 'comments',
+        owner: 'zhoushuozh',
+        admin: 'zhoushuozh'
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+</div>
+
+            <footer>
+    <div>&copy; 2018 - 周硕 </div>
+    <div>
+    Powered by Hexo &nbsp; Theme icalm
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+<script src="/blog/js/pager/dist/singlepager.js"></script>
+<!--<script>
+var sp = new Pager('data-pager-shell')
+</script>-->
+
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>-->
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+</body>
+</html>
