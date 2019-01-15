@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="周硕, zhoushuozh@gmail.com" />
+  
+  
+  
+  <title>关于cookie、session和HTTP缓存 | 周硕的博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="HTTP,web缓存,性能优化," />
+  
+
+  <!-- <script>
+    console.log('\n%c Hexo-theme-bmw v4.0 ' + '%c 🎉 https://github.com/dongyuanxin/theme-bmw 🎉\n' + '\n%c View demo online ' + '%c 🔍 https://godbmw.com/ 🔍  \n' , 'color: #fadfa3; background: #030307; padding:3px 0;', '', 'color: #fadfa3; background: #030307; padding:3px 0;', '');
+  </script> -->
+
+  
+    <meta name="description" content="个人博客，学习、记录、总结。">
+  
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/icon/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+  <script src="/js/util.js"></script>
+<script src="/js/valine.min.js"></script>
+
+  
+
+  
+    <link href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js" async></script>
+  
+
+  
+    <link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+  
+  
+  <script src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js" async></script>
+  
+  
+
+</head>
+
+  <body>
+
+    
+
+    <div id="app">
+
+      <div class="header-wrap">
+  <header>
+    <div class="site-brand">
+      <div class="site-title">
+        <a href="/">ZhouShuo</a>
+      </div>
+    </div>
+    <nav class="site-navigation">
+      <ul class="nav-menu">
+      
+        <li class="nav-item" data-path="/">
+          
+            <a 
+              href="/"
+              target="_self"
+            >
+              主页
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          
+            <a 
+              href="/archives/"
+              target="_self"
+            >
+              归档
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          
+            <a 
+              href="/categories/"
+              target="_self"
+            >
+              分类
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          
+            <a 
+              href="/tags/"
+              target="_self"
+            >
+              标签
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          
+            <a 
+              href="/friends/"
+              target="_self"
+            >
+              友链
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          
+            <a 
+              href="/about/"
+              target="_self"
+            >
+              关于
+            </a>
+          
+        </li>
+      
+      </ul>
+    </nav>
+    <i class="iconfont icon-menu"></i>
+  </header>
+</div>
+
+<script>
+  let links = document.querySelectorAll('.nav-item');
+  for(let link of links){
+    let childrenLink = link.querySelector('ul');
+    link.addEventListener('mouseenter', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown active";
+      }
+    })
+    link.addEventListener('mouseleave', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown";
+      }
+    })
+  }
+  let rootRealPath = getRealPath(window.location.pathname, true);
+  for(let link of links) {
+    let linkPath = link.getAttribute("data-path");
+    if(linkPath && getRealPath(linkPath, true) === rootRealPath) {
+      link.className = "nav-item hover";
+    }
+  }
+
+  let iconMenu = document.querySelector("i.iconfont.icon-menu"),
+    iconMenuClicked = false;
+  let navDOM = document.querySelector("nav.site-navigation");
+  iconMenu.addEventListener("click", () => {
+    iconMenuClicked 
+      ? navDOM.className = "site-navigation active"
+      : navDOM.className = "site-navigation";
+    iconMenuClicked = !iconMenuClicked;
+  })
+</script>
+
+      
+
+
+
+
+
+
+
+
+<div class="container post-index">
+
+  
+
+<div class="post">
+  <h1 class="article-title">
+    <span>关于cookie、session和HTTP缓存</span>
+  </h1>
+  <div class="article-top-meta">
+    <span>
+      发布 : 
+      2018-06-22
+    </span>
+    
+    
+  </div>
+
+  
+
+  <div class="article-content">
+    <div class="markdown-body">
+      <h3 id="Cookie的作用"><a href="#Cookie的作用" class="headerlink" title="Cookie的作用"></a>Cookie的作用</h3><p>cookie比较常见的作用是用于识别用户身份。</p>
+<p>举个例子：当用户A去访问<code>a.com</code>的时候，服务器会给A一个独一无二的<code>id=001</code>(这就是cookie)，当用户A访问<code>a.com</code>的其他网页的时候，都会带着那个独一无二的id。当B用户来访问<code>a.com</code>的时候，服务器发现他没有任何标识，也会给他一个独一无二的<code>id=002</code>，所以借助cookie服务器端就能够分清楚谁是谁了。</p>
+<h3 id="Cookie的特点"><a href="#Cookie的特点" class="headerlink" title="Cookie的特点"></a>Cookie的特点</h3><ul>
+<li>服务器通过 Set-Cookie 头给客户端一串字符串</li>
+<li>客户端每次访问相同域名的网页时，必须带上这段字符串</li>
+<li>客户端要在一段时间内保存这个Cookie</li>
+<li>Cookie 默认在用户关闭页面后就失效，后台代码可以任意设置 Cookie 的过期时间。比如max-age和后面要讲的<code>Expires</code></li>
+<li>大小大概在 4kb 以内</li>
+</ul>
+<h3 id="Cookie存在的问题"><a href="#Cookie存在的问题" class="headerlink" title="Cookie存在的问题"></a>Cookie存在的问题</h3><ul>
+<li><p>用户可以随意篡改 Cookie 。</p>
+</li>
+<li><p>Cookie 的存储大小有限制： 4KB 左右。</p>
+</li>
+</ul>
+<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><h3 id="Session是什么"><a href="#Session是什么" class="headerlink" title="Session是什么"></a>Session是什么</h3><p>维基百科的解释：</p>
+<blockquote>
+<p>在计算机科学领域来说，尤其是在网络领域，会话（session）是一种持久网络协议，在用户（或用户代理）端和服务器端之间创建关联，从而起到交换数据包的作用机制，session在网络协议（例如telnet或FTP）中是非常重要的部分。 </p>
+</blockquote>
+<p>简单来说，session 是一种在服务器端保存数据的机制。服务器通过读取浏览器发送的 cookie 和 服务器端的 session 来交换数据。 session 的作用和 cookie 的作用大致相同。最大的不同点在于两者的安全性和实现方式。</p>
+<h3 id="Session的实现"><a href="#Session的实现" class="headerlink" title="Session的实现"></a>Session的实现</h3><ol>
+<li>产生 sessionID：session 是基于 cookie 的一种方案，所以，首先要产生 cookie。client 第一次访问 server，server 生成一个随机数，命名为 sessionID，并将其放在响应头里，以 cookie 的形式返回给 client，client 以处理其他 cookie 的方式处理这段 cookie。大概是这样：<code>cookie：sessionID=135165432165</code></li>
+<li>保存 sessionID： server 将要保存的数据保存在相对应的 sessionID 之下，再将 sessionID 保存到服务器端的特定的保存 session 的内存中（如 一个叫 session 的哈希表）</li>
+<li>使用 session： client 再次访问 server，会带上首次访问时获得的 值为 sessionID 的cookie，server 读取 cookie 中的 sessionID，根据 sessionID 到保存 session 的内存寻找与 sessionID 匹配的数据，若寻找成功就将数据返回给 client。</li>
+</ol>
+<h3 id="ession-和-Cookie-的区别"><a href="#ession-和-Cookie-的区别" class="headerlink" title="ession 和 Cookie 的区别"></a>ession 和 Cookie 的区别</h3><ul>
+<li>session 在服务器端，cookie 在客户端。</li>
+<li>session 用户无法查看和修改，cookie 用户可以查看修改。</li>
+<li>session 的实现依赖于 sessionID，而 sessionID 又存储在 cookie 上，所以也可以说：session 是基于 cookie 实现的一种数据存储方式。 </li>
+</ul>
+<h2 id="LocalStorage"><a href="#LocalStorage" class="headerlink" title="LocalStorage"></a>LocalStorage</h2><h3 id="LocalStorage是什么"><a href="#LocalStorage是什么" class="headerlink" title="LocalStorage是什么"></a>LocalStorage是什么</h3><p>localStorage 是 HTML5 提供的一个 API。</p>
+<p> localStorage 的实质是一个hash（哈希表），是一个存在于浏览器上的 hash（哈希表）。</p>
+<p> localStorage 提供了几个 API 来添加、读取、删除 localStorage：</p>
+<ul>
+<li><code>localStorage.setItem(key, value)</code> ：往 hash 中添加 key: value 的数据 </li>
+<li><code>localStorage.getItem(key)</code>：读取 hash 中 key 的值 </li>
+<li><code>localStorage.removeItem(key)</code>：删除 hash 中的 key </li>
+<li><code>localStorage.clear()</code>：清空整个localStorage</li>
+</ul>
+<h3 id="LocalStorage-和-Cookie-的区别"><a href="#LocalStorage-和-Cookie-的区别" class="headerlink" title="LocalStorage 和 Cookie 的区别"></a>LocalStorage 和 Cookie 的区别</h3><p>每个域名 cookie 的大小是4Kb，每个域名 localStorage 的最大存储量的一般为 5MB左右，Chrome 10MB 左右。</p>
+<p> cookie 的使用要通过 HTTP，客户端每次访问相同域名时会带上 cookie，而 localStorage 与 HTTP 没有一毛钱关系。 </p>
+<p>localStorage 理论上永久有效，除非用户清理缓存；cookie默认有效时间是二十分钟左右，用户关闭页面后就失效，后台可以设置 cookie 的过期时间。 </p>
+<h2 id="sessionStorage"><a href="#sessionStorage" class="headerlink" title="sessionStorage"></a>sessionStorage</h2><p>sessionStorage 的所有性质基本上与 localStorage 一致，唯一的不同区别在于：</p>
+<p>sessionStorage 在用户关闭页面（会话结束）后就失效，而localStorage一直有效。 </p>
+<h2 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h2><p>###Cache-Control是什么</p>
+<p>Cache-Control 通用消息头被用于在http 请求和响应中通过指定指令来实现缓存机制。缓存指令是单向的, 这意味着在请求设置的指令，在响应中不一定包含相同的指令。 </p>
+<p>Cache-Control 有 2 种使用方式：</p>
+<ol>
+<li>以请求头形式使用 客户端可以在 HTTP 请求中使用 Cache-Control 指令</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.setHeader(<span class="string">'Cache-Control'</span>,<span class="string">'max-age=99999999'</span>) <span class="comment">// 将此次请求的资源缓存 99999999 秒</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>以响应头形式使用 服务器(node版本)可以在响应请求时，设置 Cache-Control</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.setHeader(<span class="string">'Cache-Control'</span>,<span class="string">'max-age=99999999'</span>)  <span class="comment">// 将此次请求的资源缓存 99999999 秒</span></span><br></pre></td></tr></table></figure>
+<h3 id="Cache-Control-的作用"><a href="#Cache-Control-的作用" class="headerlink" title="Cache-Control 的作用"></a>Cache-Control 的作用</h3><p>Cache-Control 使用缓存机制，用来缩短二次访问的响应时间，提高页面响应性能，实现web性能优化。 </p>
+<h2 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h2><p>Expires 是以前版本的缓存控制，如果你设置了 Cache-Control，那么 Expires 会失效。 </p>
+<p>需要注意的是。Expires 使用的是本地时间，会受本地事件影响。  </p>
+<p>Cache-Control 和 Expires ，优先使用 Cache-Control。</p>
+<h2 id="Etag"><a href="#Etag" class="headerlink" title="Etag"></a>Etag</h2><blockquote>
+<p>ETag HTTP响应头是资源的特定版本的标识符。 Etag 是 HTTP 的内容，通过匹配标识符来判断资源是否需要下载。</p>
+</blockquote>
+<h3 id="Cache-Control-max-age-缓存-与-ETag-的区别"><a href="#Cache-Control-max-age-缓存-与-ETag-的区别" class="headerlink" title="Cache-Control: max-age 缓存 与 ETag 的区别"></a>Cache-Control: max-age 缓存 与 ETag 的区别</h3><ul>
+<li>Cache-Control 通过 max-age 设置缓存的有效时间（持续时间），表示在 n 秒内不要再去向服务器要这个资源了，直接从内存缓存里面获得。</li>
+<li>ETag是通过匹配标识符（一串md5值）来判断资源是否需要下载，如果匹配，服务器将返回不带任何内容的304未修改状态，告诉客户端缓存版本可用。</li>
+<li>Cache-Control 不访问服务器，有时间限制；ETag 访问服务器，无时间限制。</li>
+</ul>
+<h2 id="last-Modified"><a href="#last-Modified" class="headerlink" title="last-Modified"></a>last-Modified</h2><blockquote>
+<p>The Last-Modified 是一个响应首部，其中包含源头服务器认定的资源做出修改的日期及时间。 </p>
+</blockquote>
+<p>last-Modified 的作用及使用方法和 Etag 基本一致。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="Cookie-如何设置过期时间？"><a href="#Cookie-如何设置过期时间？" class="headerlink" title="Cookie 如何设置过期时间？"></a>Cookie 如何设置过期时间？</h3><p>Expires 指定了一个日期/时间， 在这个日期/时间之后 cookie 过期； Cache-Control:max-age指定了一个秒数，经过此秒数后 cookie 过期； </p>
+<h3 id="如何删除cookie"><a href="#如何删除cookie" class="headerlink" title="如何删除cookie"></a>如何删除cookie</h3><p>服务器端可以通过设置 Expires、Cache-Control: max-age将 Cookie 设置为过期状态 客户端可以通过document.cookie API 删除 cookie 。</p>
+    </div>
+  </div>
+  
+    <div class="copy-right">
+      <div class="markdown-body">
+        <blockquote>
+        
+        
+          本文作者 : 周硕 <br/>
+        
+        原文链接 : <a href="">https://blog.zhoushuo.me/2018/06/22/cookie-session-http-cache/</a><br>
+        版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </blockquote>
+      </div>
+    </div>
+  
+  
+  
+    <div class="social-share"
+  style="margin-top: -2rem"
+  data-wechat-qrcode-title="<p>微信扫一扫</p>"
+  data-wechat-qrcode-helper="<p>微信右上角, 扫一扫分享</p>"
+   data-sites="qq, weibo, wechat, douban, facebook, twitter" 
+  
+>
+  <span style="color: #6b7487; font-size: 1.4rem;">分享到: </span>
+</div>
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" async></script>
+  
+
+  
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+      <span>
+        
+          <i class="iconfont icon-06tags"></i>标签: 
+          
+          <span class="span--tag">
+            <a href="/tags/HTTP/">
+              #HTTP
+            </a>
+          </span>
+          
+          <span class="span--tag">
+            <a href="/tags/web缓存/">
+              #web缓存
+            </a>
+          </span>
+          
+          <span class="span--tag">
+            <a href="/tags/性能优化/">
+              #性能优化
+            </a>
+          </span>
+          
+        
+      </span>
+    </div>
+    <div class="article-meta pull-right">
+    </div>
+  </div>
+</div>
+
+
+  <aside id="sidebar">
+    <p id="sidebar-header"></p>
+    <ol id="sidebar-toc"></ol>
+  </aside>
+  <script async>setTimeout(generateToc, 10);</script>
+
+
+  <nav class="post-navigation">
+    
+      <div class="nav-pre">
+        <i class="iconfont icon-prev"></i>
+        上一篇:
+        <a href="/2018/05/19/js-closure/" target="_self">理解JS中的闭包</a>
+      </div>
+    
+    
+      <div class="nav-next">
+        下一篇:
+        <a href="/2018/09/07/vue-component-communication/" target="_self">Vue组件间的通信</a>
+        <i class="iconfont icon-next"></i>
+      </div>
+    
+  </nav>
+
+   
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<a href="#comment" class="comment-anchor"></a>
+<div id="gitalk-container" style="margin-bottom: 50px"></div>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: 'd50f82d1de5ab2dd34c6',
+    clientSecret: '7ed79e0b3ad122582d5c8d7d5a295c1142743477',
+    id: window.location.pathname,
+    repo: 'comments',
+    owner: 'zhoushuozh',
+    admin: 'zhoushuozh'
+  })
+  gitalk.render('gitalk-container')
+</script>
+
+  
+
+   
+
+</div>
+
+
+      <footer>
+  <p class="site-info">
+    博客已萌萌哒运行<span id="time-to-now"></span><span class="my-face">(●'◡'●)ﾉ♥</span>
+    <br>
+    Theme - <a href="https://github.com/dongyuanxin/theme-bmw">BMW</a> | Made With 💗 | Powered by <a href="https://godbmw.com/">GodBMW</a>
+    <br>
+    
+  </p>
+</footer>
+
+
+
+<script>
+const timeToNowDOM = document.querySelector("#time-to-now");
+const startTimestamp = new Date(2017, 9, 13).getTime();
+
+const updateTimeStr = () => {
+  let offset = parseInt(
+      (new Date().getTime() - startTimestamp) / 1000,
+      10
+    ),
+    day = Math.floor(offset / 86400),
+    hour = Math.floor((offset % 86400) / 3600),
+    minute = Math.floor(((offset % 86400) % 3600) / 60),
+    second = Math.floor(((offset % 86400) % 3600) % 60);
+  timeToNowDOM.innerHTML =
+    day + "天" + hour + "小时" + minute + "分钟" + second + "秒";
+  setTimeout(updateTimeStr, 500);
+}
+
+setTimeout(updateTimeStr, 500);
+</script>
+
+
+      <div class="back-to-top hidden">
+  <span>
+    <i class="iconfont icon-60"></i><span></span>%
+  </span>
+</div>
+
+<script>
+const updateIconToTop = percent => {
+  let dom = document.querySelector(".back-to-top span span");
+  dom.innerText = percent;
+  if(percent < 1) {
+    document.querySelector(".back-to-top").className = "back-to-top hidden";
+  } else {
+    document.querySelector(".back-to-top").className = "back-to-top";
+  }
+}
+
+const handleScoll = () => {
+  let isRunning = false;
+  return () => {
+    if (isRunning) return;
+    isRunning = true;
+    window.requestAnimationFrame(timestamp => {
+      let scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop,
+        scrollHeight =
+          document.documentElement.scrollHeight ||
+          document.body.scrollHeight,
+        clientHeight =
+          document.documentElement.clientHeight ||
+          document.body.clientHeight;
+      isRunning = false;
+      if (scrollTop <= 1) {
+        updateIconToTop(0);
+        return;
+      }
+      if (scrollTop + clientHeight >= scrollHeight) {
+        updateIconToTop(100);
+      } else {
+        updateIconToTop(parseInt(
+          100 * scrollTop / (scrollHeight - clientHeight),
+          10
+        ));
+      }
+    });
+  };
+}
+
+const backToTop = () => {
+  let scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop,
+    delay = 10,
+    time = 200;
+  if (scrollTop <= 20) {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    return;
+  }
+  let step = Math.ceil(scrollTop * delay / time);
+  let timer = setInterval(() => {
+    scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop;
+    if (scrollTop - step <= 0) {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      clearInterval(timer);
+    } else {
+      document.documentElement.scrollTop = scrollTop - step;
+      document.body.scrollTop = scrollTop - step;
+    }
+  }, delay);
+}
+
+document.addEventListener("scroll", handleScoll(), false);
+
+document.querySelector(".back-to-top").addEventListener("click", backToTop, false);
+
+</script>
+
+    </div>
+
+    
+      <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<script>
+  (() => {
+    const mathjaxConfig = {
+      showProcessingMessages: false, //关闭js加载过程信息
+      messageStyle: "none", //不显示信息
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]], //行内公式选择符
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]], //段内公式选择符
+        skipTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"] //避开某些标签
+      },
+      "HTML-CSS": {
+        availableFonts: ["STIX", "TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+      }
+    }
+
+    let mathjaxInterval = setInterval(() => {
+      if(!window.MathJax){
+        return;
+      }
+      window.MathJax.Hub.Config(mathjaxConfig)
+      window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('app')])
+
+      clearInterval(mathjaxInterval)
+    }, 10)    
+  })()
+</script>
+    
+
+    <script src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script>
+<script async>
+  let fancyTimer = setInterval(function(){
+    if(!window.$){
+      return;
+    }
+    $(document).ready(function() {
+      $(".post img").each(function () {
+        if($(this).parent().get(0).tagName.toLowerCase() === "a") {
+          return;
+        }
+        // $(this).attr("data-fancybox", "gallery"); // if you add 'data-fancybox', img will display after showed
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "gallery");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      });
+      
+      clearInterval(fancyTimer);
+    });
+  }, 10);
+</script>
+
+    
+  </body>
+
+</html>
