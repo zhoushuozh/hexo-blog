@@ -32,8 +32,10 @@ body {
 body {
   margin: 0;
   padding: 0;
-  font-family: "Segoe UI", "Lucida Grande", Helvetica, "Microsoft YaHei",
-    FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB",
+  font-family: Helvetica, "苹方", "Segoe UI",
+  "Lucida Grande",
+  "Microsoft YaHei",
+    FreeSans, Arimo, "Hiragino Sans GB",
     "Hiragino Sans GB W3", Arial, sans-serif;
   background-color: $body-bg-color;
   overflow-x: hidden;
