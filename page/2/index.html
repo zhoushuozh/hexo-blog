@@ -1,553 +1,1130 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
+  
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="keywords" content="周硕的博客, 前端博客">
-  <meta name="description" content="周硕的个人博客，此博客是我记录工作和学习的地方。">
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫, yuanxin.me@gmail.com" />
+  
+    <meta name="robots" content="noindex" />
+  
+  
+  
   <title>周硕的博客</title>
-  
-  
-  <link rel="shortcut icon" href="/assets/favicon.ico" >
-  
-  <link rel="stylesheet" href="/css/highlight_themes/tomorrow.css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-  <!-- global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111550549-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'UA-111550549-1');
-</script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
+    <meta name="keywords" content="周硕、前端博客、个人网站" />
+  
+
+  <script>
+    console.log('\n%c Hexo-theme-bmw v4.0 ' + '%c 🎉 https://github.com/dongyuanxin/theme-bmw 🎉\n' + '\n%c View demo online ' + '%c 🔍 https://godbmw.com/ 🔍  \n' , 'color: #fadfa3; background: #030307; padding:3px 0;', '', 'color: #fadfa3; background: #030307; padding:3px 0;', '');
+  </script>
+
+  
+    <meta name="description" content="个人博客，学习、记录、总结。">
+  
+
+  
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/icon/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+  <script src="/js/util.js"></script>
+<script src="/js/valine.min.js"></script>
+
+  
+
+  
+    <link href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js" async></script>
+  
+
+  
+    <link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+  
+  
+  <script src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js" async></script>
+  
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.0/dist/av-min.js"></script>
+  
+
 </head>
 
-<body>
-<div class="Shell">
-    <aside class='SideBar'>
-    <section class='avatar' style="background: #333 url(/assets/header-bg2.jpg) no-repeat center; background-size:cover;">
-        <div class='av-pic' style="background-image: url(/assets/logo.jpg)">
-        </div>
-    </section>
-    <section class='menu'>
-        <div>周硕的博客</div>
-        
-        <ul>
-          
-            <a href="/" class="Btn">
-              <li>Home</li>
-            </a>  
-          
-            <a href="/archives/" class="Btn">
-              <li>Archive</li>
-            </a>  
-          
-            <a href="/tags/" class="Btn">
-              <li>Tags</li>
-            </a>  
-          
-            <a href="/about/" class="Btn">
-              <li>About</li>
-            </a>  
-          
-        </ul>
-    </section>
-    <section class="media">
-        
-            
-                <a href="https://github.com/zhoushuozh/">
-                    <img src="/assets/github.svg" />
-                </a>
-            
-        
-            
-                <a href="https://weibo.com/zhoushuozh/">
-                    <img src="/assets/weibo.svg" />
-                </a>
-            
-        
-    </section>
-</aside>
+  <body>
 
-    <div class="container">
-        <div data-pager-shell>
-            <ul class="Index">
-  
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2018/03/21/firekylin-hexo/">博客从Firekylin迁移到Hexo</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2018-03-20T16:00:00.000Z" itemprop="datePublished">
-    2018-03-21
-  </time>
-  
-  | 
-  <ul>
     
-  <li class="meta-text">
-  { <a href="/tags/hexo/">hexo</a> }
-  </li>
 
+    <div id="app">
 
-  </ul>
-  
-  
+      <div class="header-wrap">
+  <header>
+    <div class="site-brand">
+      <div class="site-title">
+        <a href="/">GODBMW.com</a>
+      </div>
+    </div>
+    <nav class="site-navigation">
+      <ul class="nav-menu">
+      
+        <li class="nav-item" data-path="/">
+          
+            <a 
+              href="/"
+              target="_self"
+            >
+              主页
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          
+            <a 
+              href="/archives/"
+              target="_self"
+            >
+              归档
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          
+            <a 
+              href="/categories/"
+              target="_self"
+            >
+              分类
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          
+            <a 
+              href="/tags/"
+              target="_self"
+            >
+              标签
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/friends/">
+          
+            <a 
+              href="/friends/"
+              target="_self"
+            >
+              友链
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          
+            <a 
+              href="/about/"
+              target="_self"
+            >
+              关于
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="">
+          
+            <a href="javascript:void(0);" v-else>抓到我</a>
+            <ul class="nav-menu--dropdown">
+              
+                <li>
+                  <a 
+                    href="https://github.com/dongyuanxin" 
+                    target="_blank"
+                  >
+                    Github
+                  </a>
+                </li>
+              
+                <li>
+                  <a 
+                    href="https://www.zhihu.com/people/godbmw/activities" 
+                    target="_blank"
+                  >
+                    知乎
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+      
+      </ul>
+    </nav>
+    <i class="iconfont icon-menu"></i>
+  </header>
 </div>
 
-    </header>
-    <div>
+<script>
+  let links = document.querySelectorAll('.nav-item');
+  for(let link of links){
+    let childrenLink = link.querySelector('ul');
+    link.addEventListener('mouseenter', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown active";
+      }
+    })
+    link.addEventListener('mouseleave', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown";
+      }
+    })
+  }
+  let rootRealPath = getRealPath(window.location.pathname, true);
+  for(let link of links) {
+    let linkPath = link.getAttribute("data-path");
+    if(linkPath && getRealPath(linkPath, true) === rootRealPath) {
+      link.className = "nav-item hover";
+    }
+  }
+
+  let iconMenu = document.querySelector("i.iconfont.icon-menu"),
+    iconMenuClicked = false;
+  let navDOM = document.querySelector("nav.site-navigation");
+  iconMenu.addEventListener("click", () => {
+    iconMenuClicked 
+      ? navDOM.className = "site-navigation active"
+      : navDOM.className = "site-navigation";
+    iconMenuClicked = !iconMenuClicked;
+  })
+</script>
+
       
+<div class="container home-index">
+  
+  <div class="post">
+    <h1 class="article-title">
+      <a href="/2018/03/21/firekylin-hexo/">
+        <span>博客从Firekylin迁移到Hexo</span>
+      </a>
+    </h1>
+    <!-- PC端文章信息 -->
+    <div class="article-top-meta pc-view">
+      <span>
+        发布时间 : 2018-03-21
+      </span>
+    </div>
+    <!-- 移动端文章信息 -->
+    <div class="article-top-meta mobile-view">
+      <span>
+        发布 : 2018-03-21
+      </span>
+      
+      
+        <span>
+          浏览 : <span class="article-timer" data-identity="firekylin-hexo"></span>
+        </span>
+      
+    </div>
+    
+    <!-- 文章简介 -->
+    <div class="article-content">
+      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
         <h2 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h2><p>之前使用的一直是Firekylin，Firekylin是由360公司Web前端工程师组成的专业团队 75Team 进行开发和维护，基于ThinkJS开发，快速很快且后台管理很方便。但是前些天突然想把博客放到二级目录，在折腾的过程中出现了一些问题，如静态资源无法加载，尝试了很多办法，最终都没不能完全解决这个问题。查了一下，<code>Firekylin</code>在设计之初没有考虑子目录，本着“生命不息，折腾不止”的精神，我决定把博客迁移到<code>Hexo</code>。</p>
-        
-          <div class="more-link">
-            <a href="/2018/03/21/firekylin-hexo/#more">read more »</a>
-          </div>
-        
+      </div>
+    </div>
+    <div class="article-footer">
+      <div class="article-meta pull-left">
+        <!-- 分类pc端可见 -->
+        <span class="pc-view">
+          
+        <span>
+          
+            <i class="iconfont icon-06tags"></i>标签:
+            
+              <span class="span--tag">
+                <a href="/tags/hexo/">
+                  #hexo
+                </a>
+              </span>
+            
+                    
+        </span>
+      </div>
+      
+        <div class="article-meta pull-right">
+          <span class="pc-view">
+            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="firekylin-hexo"></span>
+          </span>
+        </div>
       
     </div>
-</article>
-
-    </li>
+  </div>
   
-    <li>
-      <article class='ListView'>
-    <header class="title">
+  <div class="post">
+    <h1 class="article-title">
+      <a href="/2018/03/20/vim-command/">
+        <span>【笔记】 vim命令大全</span>
+      </a>
+    </h1>
+    <!-- PC端文章信息 -->
+    <div class="article-top-meta pc-view">
+      <span>
+        发布时间 : 2018-03-20
+      </span>
+    </div>
+    <!-- 移动端文章信息 -->
+    <div class="article-top-meta mobile-view">
+      <span>
+        发布 : 2018-03-20
+      </span>
       
-        <h1>
-          <a href="/2018/03/20/vim-command/">【笔记】 vim命令大全</a>
-        </h1>
       
-      <div class='ListMeta'>
-  <time datetime="2018-03-20T03:39:21.000Z" itemprop="datePublished">
-    2018-03-20
-  </time>
-  
-  | 
-  <ul>
+        <span>
+          浏览 : <span class="article-timer" data-identity="vim-command"></span>
+        </span>
+      
+    </div>
     
-  <li class="meta-text">
-  { <a href="/tags/vim/">vim</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/tags/编辑器/">编辑器</a> }
-  </li>
-
-
-  </ul>
-  
-  
-</div>
-
-    </header>
-    <div>
-      
+    <!-- 文章简介 -->
+    <div class="article-content">
+      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
         <p><img src="https://cdn.zhoushuo.me/vim.jpg" alt="vim"></p>
-        
-          <div class="more-link">
-            <a href="/2018/03/20/vim-command/#more">read more »</a>
-          </div>
-        
+      </div>
+    </div>
+    <div class="article-footer">
+      <div class="article-meta pull-left">
+        <!-- 分类pc端可见 -->
+        <span class="pc-view">
+          
+        <span>
+          
+            <i class="iconfont icon-06tags"></i>标签:
+            
+              <span class="span--tag">
+                <a href="/tags/vim/">
+                  #vim
+                </a>
+              </span>
+            
+              <span class="span--tag">
+                <a href="/tags/编辑器/">
+                  #编辑器
+                </a>
+              </span>
+            
+                    
+        </span>
+      </div>
+      
+        <div class="article-meta pull-right">
+          <span class="pc-view">
+            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="vim-command"></span>
+          </span>
+        </div>
       
     </div>
-</article>
-
-    </li>
+  </div>
   
-    <li>
-      <article class='ListView'>
-    <header class="title">
+  <div class="post">
+    <h1 class="article-title">
+      <a href="/2018/03/11/drawing-borad/">
+        <span>使用JS和Canvas做一个画板</span>
+      </a>
+    </h1>
+    <!-- PC端文章信息 -->
+    <div class="article-top-meta pc-view">
+      <span>
+        发布时间 : 2018-03-11
+      </span>
+    </div>
+    <!-- 移动端文章信息 -->
+    <div class="article-top-meta mobile-view">
+      <span>
+        发布 : 2018-03-11
+      </span>
       
-        <h1>
-          <a href="/2018/03/11/drawing-borad/">使用JS和Canvas做一个画板</a>
-        </h1>
+        <span>
+        分类 :
+          <a href="/categories/前端/">
+            前端
+          </a>
+        </span>
       
-      <div class='ListMeta'>
-  <time datetime="2018-03-10T17:22:14.000Z" itemprop="datePublished">
-    2018-03-11
-  </time>
-  
-  | 
-  <ul>
+      
+        <span>
+          浏览 : <span class="article-timer" data-identity="drawing-borad"></span>
+        </span>
+      
+    </div>
     
-  <li class="meta-text">
-  { <a href="/tags/JavaScript/">JavaScript</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/tags/HTML5/">HTML5</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/tags/canvas/">canvas</a> }
-  </li>
-
-
-  </ul>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/前端/">前端</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
+    <!-- 文章简介 -->
+    <div class="article-content">
+      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
         <p><img src="https://cdn.zhoushuo.me/zhoushuodrawing.png" alt="canvas画板截图"></p>
 <p>前些天学习了<code>HTML5</code>的<code>&lt;canvas&gt;</code>元素，今天就来实践一下，用<code>canvas</code>做一个画板。</p>
-        
-          <div class="more-link">
-            <a href="/2018/03/11/drawing-borad/#more">read more »</a>
-          </div>
-        
+      </div>
+    </div>
+    <div class="article-footer">
+      <div class="article-meta pull-left">
+        <!-- 分类pc端可见 -->
+        <span class="pc-view">
+          
+            <i class="iconfont icon-tag"></i>分类:
+            <a href="/categories/前端/">
+              前端
+            </a>
+          </span>
+          
+        <span>
+          
+            <i class="iconfont icon-06tags"></i>标签:
+            
+              <span class="span--tag">
+                <a href="/tags/JavaScript/">
+                  #JavaScript
+                </a>
+              </span>
+            
+              <span class="span--tag">
+                <a href="/tags/HTML5/">
+                  #HTML5
+                </a>
+              </span>
+            
+              <span class="span--tag">
+                <a href="/tags/canvas/">
+                  #canvas
+                </a>
+              </span>
+            
+                    
+        </span>
+      </div>
+      
+        <div class="article-meta pull-right">
+          <span class="pc-view">
+            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="drawing-borad"></span>
+          </span>
+        </div>
       
     </div>
-</article>
-
-    </li>
+  </div>
   
-    <li>
-      <article class='ListView'>
-    <header class="title">
+  <div class="post">
+    <h1 class="article-title">
+      <a href="/2018/03/05/html5-canvas/">
+        <span>HTML5 Canvas 基础</span>
+      </a>
+    </h1>
+    <!-- PC端文章信息 -->
+    <div class="article-top-meta pc-view">
+      <span>
+        发布时间 : 2018-03-05
+      </span>
+    </div>
+    <!-- 移动端文章信息 -->
+    <div class="article-top-meta mobile-view">
+      <span>
+        发布 : 2018-03-05
+      </span>
       
-        <h1>
-          <a href="/2018/03/05/html5-canvas/">HTML5 Canvas 基础</a>
-        </h1>
+        <span>
+        分类 :
+          <a href="/categories/前端/">
+            前端
+          </a>
+        </span>
       
-      <div class='ListMeta'>
-  <time datetime="2018-03-05T15:21:54.000Z" itemprop="datePublished">
-    2018-03-05
-  </time>
-  
-  | 
-  <ul>
+      
+        <span>
+          浏览 : <span class="article-timer" data-identity="html5-canvas"></span>
+        </span>
+      
+    </div>
     
-  <li class="meta-text">
-  { <a href="/tags/JavaScript/">JavaScript</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/tags/HTML5/">HTML5</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/tags/canvas/">canvas</a> }
-  </li>
-
-
-  </ul>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/前端/">前端</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
+    <!-- 文章简介 -->
+    <div class="article-content">
+      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
         <p><code>&lt;canvas&gt;</code> 是HTML5新增的元素，可以用于绘制图形，制作照片，创建动画。<code>&lt;canvas&gt;</code> 标签只是图形容器，它没有自己的行为，必须使用脚本来绘制图形。</p>
 <h3 id="创建一个canvas"><a href="#创建一个canvas" class="headerlink" title="创建一个canvas"></a>创建一个canvas</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"mycanvas"</span> <span class="attr">width</span>=<span class="string">"300"</span> <span class="attr">height</span>=<span class="string">"300"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
-        
-          <div class="more-link">
-            <a href="/2018/03/05/html5-canvas/#more">read more »</a>
-          </div>
-        
+      </div>
+    </div>
+    <div class="article-footer">
+      <div class="article-meta pull-left">
+        <!-- 分类pc端可见 -->
+        <span class="pc-view">
+          
+            <i class="iconfont icon-tag"></i>分类:
+            <a href="/categories/前端/">
+              前端
+            </a>
+          </span>
+          
+        <span>
+          
+            <i class="iconfont icon-06tags"></i>标签:
+            
+              <span class="span--tag">
+                <a href="/tags/JavaScript/">
+                  #JavaScript
+                </a>
+              </span>
+            
+              <span class="span--tag">
+                <a href="/tags/HTML5/">
+                  #HTML5
+                </a>
+              </span>
+            
+              <span class="span--tag">
+                <a href="/tags/canvas/">
+                  #canvas
+                </a>
+              </span>
+            
+                    
+        </span>
+      </div>
+      
+        <div class="article-meta pull-right">
+          <span class="pc-view">
+            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="html5-canvas"></span>
+          </span>
+        </div>
       
     </div>
-</article>
-
-    </li>
+  </div>
   
-    <li>
-      <article class='ListView'>
-    <header class="title">
+  <div class="post">
+    <h1 class="article-title">
+      <a href="/2018/02/28/heap-sort/">
+        <span>堆排序解析及JavaScript实现</span>
+      </a>
+    </h1>
+    <!-- PC端文章信息 -->
+    <div class="article-top-meta pc-view">
+      <span>
+        发布时间 : 2018-02-28
+      </span>
+    </div>
+    <!-- 移动端文章信息 -->
+    <div class="article-top-meta mobile-view">
+      <span>
+        发布 : 2018-02-28
+      </span>
       
-        <h1>
-          <a href="/2018/02/28/heap-sort/">堆排序解析及JavaScript实现</a>
-        </h1>
+        <span>
+        分类 :
+          <a href="/categories/前端/">
+            前端
+          </a>
+        </span>
       
-      <div class='ListMeta'>
-  <time datetime="2018-02-27T17:35:21.000Z" itemprop="datePublished">
-    2018-02-28
-  </time>
-  
-  | 
-  <ul>
+      
+        <span>
+          浏览 : <span class="article-timer" data-identity="heap-sort"></span>
+        </span>
+      
+    </div>
     
-  <li class="meta-text">
-  { <a href="/tags/JavaScript/">JavaScript</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/tags/算法/">算法</a> }
-  </li>
-
-
-  </ul>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/前端/">前端</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
+    <!-- 文章简介 -->
+    <div class="article-content">
+      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
         <h3 id="什么是堆"><a href="#什么是堆" class="headerlink" title="什么是堆"></a>什么是堆</h3><p>在计算机科学中，二叉树（英语：Binary tree）是每个节点最多只有两个分支(不存在分支度大于<code>2</code>的节点)的树结构。通常分支被称作“左子树”和“右子树”。二叉树的分支具有左右次序，不能颠倒。</p>
 <p>二叉树的每个结点至多只有二棵子树（不存在度大于 <code>2</code> 的结点），二叉树的子树有左右之分，次序不能颠倒。二叉树的第 <code>i</code> 层至多有 <code>2i - 1</code> 个结点；深度为 <code>k</code> 的二叉树至多有 <code>2k - 1</code> 个结点；对任何一棵二叉树 <code>T</code>，如果其终端结点数为 <code>n0</code>，度为 <code>2</code> 的结点数为 <code>n2</code>，则<code>n0 = n2 + 1</code>。</p>
-        
-          <div class="more-link">
-            <a href="/2018/02/28/heap-sort/#more">read more »</a>
-          </div>
-        
+      </div>
+    </div>
+    <div class="article-footer">
+      <div class="article-meta pull-left">
+        <!-- 分类pc端可见 -->
+        <span class="pc-view">
+          
+            <i class="iconfont icon-tag"></i>分类:
+            <a href="/categories/前端/">
+              前端
+            </a>
+          </span>
+          
+        <span>
+          
+            <i class="iconfont icon-06tags"></i>标签:
+            
+              <span class="span--tag">
+                <a href="/tags/JavaScript/">
+                  #JavaScript
+                </a>
+              </span>
+            
+              <span class="span--tag">
+                <a href="/tags/算法/">
+                  #算法
+                </a>
+              </span>
+            
+                    
+        </span>
+      </div>
+      
+        <div class="article-meta pull-right">
+          <span class="pc-view">
+            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="heap-sort"></span>
+          </span>
+        </div>
       
     </div>
-</article>
-
-    </li>
+  </div>
   
-    <li>
-      <article class='ListView'>
-    <header class="title">
+  <div class="post">
+    <h1 class="article-title">
+      <a href="/2018/02/26/count-sort/">
+        <span>计数排序解析及JavaScript实现</span>
+      </a>
+    </h1>
+    <!-- PC端文章信息 -->
+    <div class="article-top-meta pc-view">
+      <span>
+        发布时间 : 2018-02-26
+      </span>
+    </div>
+    <!-- 移动端文章信息 -->
+    <div class="article-top-meta mobile-view">
+      <span>
+        发布 : 2018-02-26
+      </span>
       
-        <h1>
-          <a href="/2018/02/26/count-sort/">计数排序解析及JavaScript实现</a>
-        </h1>
+        <span>
+        分类 :
+          <a href="/categories/前端/">
+            前端
+          </a>
+        </span>
       
-      <div class='ListMeta'>
-  <time datetime="2018-02-26T14:32:45.000Z" itemprop="datePublished">
-    2018-02-26
-  </time>
-  
-  | 
-  <ul>
+      
+        <span>
+          浏览 : <span class="article-timer" data-identity="count-sort"></span>
+        </span>
+      
+    </div>
     
-  <li class="meta-text">
-  { <a href="/tags/JavaScript/">JavaScript</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/tags/算法/">算法</a> }
-  </li>
-
-
-  </ul>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/前端/">前端</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
+    <!-- 文章简介 -->
+    <div class="article-content">
+      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
         <h3 id="计数排序"><a href="#计数排序" class="headerlink" title="计数排序"></a>计数排序</h3><p>计数排序（Counting sort）是一种稳定的线性时间排序算法。</p>
 <p>计数排序使用一个额外的数组}<code>C</code> ，其中第i个元素是待排序数组 <code>A</code> 中值等于 <code>i</code> 的元素的个数。然后根据数组 <code>C</code> 来将 <code>A</code> 中的元素排到正确的位置。当输入的元素是 <code>n</code> 个 <code>0</code> 到 <code>k</code> 之间的整数时，它的运行时间是 <code>Θ(n+k)</code>。计数排序不是比较排序，排序的速度快于任何比较排序算法。</p>
-        
-          <div class="more-link">
-            <a href="/2018/02/26/count-sort/#more">read more »</a>
-          </div>
-        
+      </div>
+    </div>
+    <div class="article-footer">
+      <div class="article-meta pull-left">
+        <!-- 分类pc端可见 -->
+        <span class="pc-view">
+          
+            <i class="iconfont icon-tag"></i>分类:
+            <a href="/categories/前端/">
+              前端
+            </a>
+          </span>
+          
+        <span>
+          
+            <i class="iconfont icon-06tags"></i>标签:
+            
+              <span class="span--tag">
+                <a href="/tags/JavaScript/">
+                  #JavaScript
+                </a>
+              </span>
+            
+              <span class="span--tag">
+                <a href="/tags/算法/">
+                  #算法
+                </a>
+              </span>
+            
+                    
+        </span>
+      </div>
+      
+        <div class="article-meta pull-right">
+          <span class="pc-view">
+            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="count-sort"></span>
+          </span>
+        </div>
       
     </div>
-</article>
-
-    </li>
+  </div>
   
-    <li>
-      <article class='ListView'>
-    <header class="title">
+  <div class="post">
+    <h1 class="article-title">
+      <a href="/2018/01/18/js-throttle-debounce/">
+        <span>JS函数节流(throttle)与函数去抖(debounce)</span>
+      </a>
+    </h1>
+    <!-- PC端文章信息 -->
+    <div class="article-top-meta pc-view">
+      <span>
+        发布时间 : 2018-01-18
+      </span>
+    </div>
+    <!-- 移动端文章信息 -->
+    <div class="article-top-meta mobile-view">
+      <span>
+        发布 : 2018-01-18
+      </span>
       
-        <h1>
-          <a href="/2018/01/18/js-throttle-debounce/">JS函数节流(throttle)与函数去抖(debounce)</a>
-        </h1>
+        <span>
+        分类 :
+          <a href="/categories/前端/">
+            前端
+          </a>
+        </span>
       
-      <div class='ListMeta'>
-  <time datetime="2018-01-18T13:23:43.000Z" itemprop="datePublished">
-    2018-01-18
-  </time>
-  
-  | 
-  <ul>
+      
+        <span>
+          浏览 : <span class="article-timer" data-identity="js-throttle-debounce"></span>
+        </span>
+      
+    </div>
     
-  <li class="meta-text">
-  { <a href="/tags/性能优化/">性能优化</a> }
-  </li>
-
-  <li class="meta-text">
-  { <a href="/tags/JavaScript/">JavaScript</a> }
-  </li>
-
-
-  </ul>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/前端/">前端</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
+    <!-- 文章简介 -->
+    <div class="article-content">
+      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
         <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在浏览器 DOM 事件里面，有一些事件会随着用户的操作不间断触发。如：改变窗口大小（resize）、鼠标滚动（scroll）、鼠标移动（mousemove），如果把逻辑函数直接绑定到这些事件上，会严重影响性能，再比如把ajax请求直接绑定到keydown事件上，将在用户输入时产生频率很高的ajax请求，给服务器造成不必要的响应压力。</p>
-        
-          <div class="more-link">
-            <a href="/2018/01/18/js-throttle-debounce/#more">read more »</a>
-          </div>
-        
+      </div>
+    </div>
+    <div class="article-footer">
+      <div class="article-meta pull-left">
+        <!-- 分类pc端可见 -->
+        <span class="pc-view">
+          
+            <i class="iconfont icon-tag"></i>分类:
+            <a href="/categories/前端/">
+              前端
+            </a>
+          </span>
+          
+        <span>
+          
+            <i class="iconfont icon-06tags"></i>标签:
+            
+              <span class="span--tag">
+                <a href="/tags/JavaScript/">
+                  #JavaScript
+                </a>
+              </span>
+            
+              <span class="span--tag">
+                <a href="/tags/性能优化/">
+                  #性能优化
+                </a>
+              </span>
+            
+                    
+        </span>
+      </div>
+      
+        <div class="article-meta pull-right">
+          <span class="pc-view">
+            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="js-throttle-debounce"></span>
+          </span>
+        </div>
       
     </div>
-</article>
-
-    </li>
+  </div>
   
-    <li>
-      <article class='ListView'>
-    <header class="title">
+  <div class="post">
+    <h1 class="article-title">
+      <a href="/2017/10/13/text-overflow/">
+        <span>CSS多行文本溢出省略显示</span>
+      </a>
+    </h1>
+    <!-- PC端文章信息 -->
+    <div class="article-top-meta pc-view">
+      <span>
+        发布时间 : 2017-10-13
+      </span>
+    </div>
+    <!-- 移动端文章信息 -->
+    <div class="article-top-meta mobile-view">
+      <span>
+        发布 : 2017-10-13
+      </span>
       
-        <h1>
-          <a href="/2017/10/13/text-overflow/">CSS多行文本溢出省略显示</a>
-        </h1>
+        <span>
+        分类 :
+          <a href="/categories/前端/">
+            前端
+          </a>
+        </span>
       
-      <div class='ListMeta'>
-  <time datetime="2017-10-13T12:52:21.000Z" itemprop="datePublished">
-    2017-10-13
-  </time>
-  
-  | 
-  <ul>
+      
+        <span>
+          浏览 : <span class="article-timer" data-identity="text-overflow"></span>
+        </span>
+      
+    </div>
     
-  <li class="meta-text">
-  { <a href="/tags/css/">css</a> }
-  </li>
-
-
-  </ul>
+    <!-- 文章简介 -->
+    <div class="article-content">
+      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
+        <p>文本溢出我们经常用到的应该就是<code>text-overflow:ellipsis</code>了，相信大家也很熟悉，但是对于多行文本的溢出处理确接触的不是很多，最近在公司群里面有同事问到，并且自己也遇到过这个问题，所以专门研究过这个问题。</p>
+      </div>
+    </div>
+    <div class="article-footer">
+      <div class="article-meta pull-left">
+        <!-- 分类pc端可见 -->
+        <span class="pc-view">
+          
+            <i class="iconfont icon-tag"></i>分类:
+            <a href="/categories/前端/">
+              前端
+            </a>
+          </span>
+          
+        <span>
+          
+            <i class="iconfont icon-06tags"></i>标签:
+            
+              <span class="span--tag">
+                <a href="/tags/css/">
+                  #css
+                </a>
+              </span>
+            
+                    
+        </span>
+      </div>
+      
+        <div class="article-meta pull-right">
+          <span class="pc-view">
+            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="text-overflow"></span>
+          </span>
+        </div>
+      
+    </div>
+  </div>
   
-  
-  / 
-  <ul>
+
+  <nav class="page-navigation">
     
-  <li class="meta-text">
-  { <a href="/categories/前端/">前端</a> }
-  </li>
+      <a href="/">上一页</a>
+    
+    
+  </nav>
 
-
-  </ul>
   
+    <script defer>
+const valineAPI = (() => {
+  try {
+    AV.init("Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz", "WaR7nrzhliHj9aVwdQzkdlGd");
+  } catch(error) {}
+  const isExist = (identity) => {
+    identity = identity || getRealPath();
+    let query = new AV.Query('Timer');
+    return new Promise((resolve, reject) => {
+      query.equalTo("identity", identity);
+      query.find().then(results => {
+        resolve(results.length > 0);
+      }, error => reject(error));
+    })
+  }
+
+  const _get = (identity) => {
+    let query = null;
+    if(identity && identity instanceof Array){
+      let querys = [];
+      for(let i = 0; i < identity.length; ++i) {
+        querys[i] = new AV.Query('Timer');
+        querys[i].equalTo('identity', identity[i]);
+      }
+      query = AV.Query.or.apply(null ,querys);
+    } else {
+      identity = identity || getRealPath();
+      query = new AV.Query("Timer");
+      query.equalTo("identity", identity);
+    }
+
+    return new Promise((resolve, reject) => {
+      query.find()
+      .then(results => resolve(results))
+      .catch(error => reject(error))
+    })
+  }
+
+  const create = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let Todo = AV.Object.extend('Timer');
+      let todo = new Todo();
+      todo.set("times", 1);
+      todo.set("identity", identity);
+      todo.save().then(res => resolve(true), error => reject(error));
+    })
+  }
+
+  const update = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let query = new AV.Query('Timer');
+      query.equalTo("identity", identity);
+      query.find().then(todos => {
+        todos.forEach(todo => {
+          todo.set("times", todo.attributes.times + 1);
+        });
+        return AV.Object.saveAll(todos);
+      }).then(todos => resolve(true), error => reject(error));
+    })
+  }
+
+  return {
+    isExist,
+    _get,
+    update,
+    create
+  }
+})()
+
+const calcAndWriteTimes = () => {
+  let isPost = false;
+
+  let timerAllDOM = document.querySelectorAll(".article-timer");
+
+  if(isPost) {
+    let identity = timerAllDOM[0].getAttribute("data-identity");
+    valineAPI.isExist(identity)
+    .then(exist => {
+      if(exist) {
+        return valineAPI.update(identity);
+      }
+      return new Promise(resolve => resolve(true));
+    })
+    .then( succuess => valineAPI._get(identity))
+    .then( result => timerAllDOM[0].innerText = result[0].attributes.times)
+    .catch(error => console.log(error.message))
+    return ;
+  }
+
+  let timerDOMCache = {};
+
+  for(let timerDOM of timerAllDOM) {
+    let identity = timerDOM.getAttribute("data-identity");
+    if(timerDOMCache.hasOwnProperty(identity)){
+      timerDOMCache[identity].dom.push(timerDOM);
+    }else{
+      timerDOMCache[identity] = {
+        dom: [timerDOM],
+        times: undefined
+      };
+    }
+  }
+
+  let identities = Object.keys(timerDOMCache);
+  valineAPI._get(identities).then(results => {
+    for(let result of results) {
+      let {identity, times} = result.attributes;
+      timerDOMCache[identity].times = times;
+      timerDOMCache[identity].dom.map(item => item.innerText = times);
+    }
+    for(let identity of identities) {
+      if(timerDOMCache[identity].times){
+        continue;
+      }
+      timerDOMCache[identity].dom.map(item => item.innerText = 1);
+      valineAPI.create(identity);
+    }
+  }).catch(error => console.log(error.message))
+}
+
+if(true){
+  calcAndWriteTimes();
+}
+</script>
+   
 </div>
 
-    </header>
-    <div>
-      
-        <p>文本溢出我们经常用到的应该就是<code>text-overflow:ellipsis</code>了，相信大家也很熟悉，但是对于多行文本的溢出处理确接触的不是很多，最近在公司群里面有同事问到，并且自己也遇到过这个问题，所以专门研究过这个问题。</p>
-        
-          <div class="more-link">
-            <a href="/2017/10/13/text-overflow/#more">read more »</a>
-          </div>
-        
-      
-    </div>
-</article>
 
-    </li>
-  
-</ul>
-
-  <section id="nav-wrapper">
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">« prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
-  </section>
-
-
-            <footer>
-    <div>&copy; 2018 - 周硕 </div>
-    <div>
-    Powered by Hexo &nbsp; Theme icalm
-    </div>
+      <footer>
+  <p class="site-info">
+    博客已萌萌哒运行<span id="time-to-now"></span><span class="my-face">(●'◡'●)ﾉ♥</span>
+    <br>
+    Theme - <a href="https://github.com/dongyuanxin/theme-bmw">BMW</a> | Made With 💗 | Powered by <a href="https://godbmw.com/">GodBMW</a>
+    <br>
+    
+  </p>
 </footer>
 
-        </div>
-    </div>
-</div>
-<script src="/js/pager/dist/singlepager.js"></script>
-<!--<script>
-var sp = new Pager('data-pager-shell')
-</script>-->
-
-<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>-->
 
 
 <script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+const timeToNowDOM = document.querySelector("#time-to-now");
+const startTimestamp = new Date(2018, 1, 10).getTime();
+
+const updateTimeStr = () => {
+  let offset = parseInt(
+      (new Date().getTime() - startTimestamp) / 1000,
+      10
+    ),
+    day = Math.floor(offset / 86400),
+    hour = Math.floor((offset % 86400) / 3600),
+    minute = Math.floor(((offset % 86400) % 3600) / 60),
+    second = Math.floor(((offset % 86400) % 3600) % 60);
+  timeToNowDOM.innerHTML =
+    day + "天" + hour + "小时" + minute + "分钟" + second + "秒";
+  setTimeout(updateTimeStr, 500);
+}
+
+setTimeout(updateTimeStr, 500);
 </script>
 
 
-</body>
+      <div class="back-to-top hidden">
+  <span>
+    <i class="iconfont icon-60"></i><span></span>%
+  </span>
+</div>
+
+<script>
+const updateIconToTop = percent => {
+  let dom = document.querySelector(".back-to-top span span");
+  dom.innerText = percent;
+  if(percent < 1) {
+    document.querySelector(".back-to-top").className = "back-to-top hidden";
+  } else {
+    document.querySelector(".back-to-top").className = "back-to-top";
+  }
+}
+
+const handleScoll = () => {
+  let isRunning = false;
+  return () => {
+    if (isRunning) return;
+    isRunning = true;
+    window.requestAnimationFrame(timestamp => {
+      let scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop,
+        scrollHeight =
+          document.documentElement.scrollHeight ||
+          document.body.scrollHeight,
+        clientHeight =
+          document.documentElement.clientHeight ||
+          document.body.clientHeight;
+      isRunning = false;
+      if (scrollTop <= 1) {
+        updateIconToTop(0);
+        return;
+      }
+      if (scrollTop + clientHeight >= scrollHeight) {
+        updateIconToTop(100);
+      } else {
+        updateIconToTop(parseInt(
+          100 * scrollTop / (scrollHeight - clientHeight),
+          10
+        ));
+      }
+    });
+  };
+}
+
+const backToTop = () => {
+  let scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop,
+    delay = 10,
+    time = 200;
+  if (scrollTop <= 20) {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    return;
+  }
+  let step = Math.ceil(scrollTop * delay / time);
+  let timer = setInterval(() => {
+    scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop;
+    if (scrollTop - step <= 0) {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      clearInterval(timer);
+    } else {
+      document.documentElement.scrollTop = scrollTop - step;
+      document.body.scrollTop = scrollTop - step;
+    }
+  }, delay);
+}
+
+document.addEventListener("scroll", handleScoll(), false);
+
+document.querySelector(".back-to-top").addEventListener("click", backToTop, false);
+
+</script>
+
+    </div>
+
+    
+      <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<script>
+  (() => {
+    const mathjaxConfig = {
+      showProcessingMessages: false, //关闭js加载过程信息
+      messageStyle: "none", //不显示信息
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]], //行内公式选择符
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]], //段内公式选择符
+        skipTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"] //避开某些标签
+      },
+      "HTML-CSS": {
+        availableFonts: ["STIX", "TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+      }
+    }
+
+    let mathjaxInterval = setInterval(() => {
+      if(!window.MathJax){
+        return;
+      }
+      window.MathJax.Hub.Config(mathjaxConfig)
+      window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('app')])
+
+      clearInterval(mathjaxInterval)
+    }, 10)    
+  })()
+</script>
+    
+
+    <script src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script>
+<script async>
+  let fancyTimer = setInterval(function(){
+    if(!window.$){
+      return;
+    }
+    $(document).ready(function() {
+      $(".post img").each(function () {
+        if($(this).parent().get(0).tagName.toLowerCase() === "a") {
+          return;
+        }
+        // $(this).attr("data-fancybox", "gallery"); // if you add 'data-fancybox', img will display after showed
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "gallery");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      });
+      
+      clearInterval(fancyTimer);
+    });
+  }, 10);
+</script>
+
+    
+  </body>
+
 </html>
