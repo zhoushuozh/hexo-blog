@@ -7,6 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 <link rel="canonical" href="https://blog.zhoushuo.me/post/drawing-borad/">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2a2b33">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
 <meta name="description" content="前些天学习了HTML5的&amp;lt;canvas&amp;gt;元素，今天就来实践一下，用canvas做一个画板。 首先说一下要实现的功能：  切换画笔颜色 调整笔刷粗细 清空画布 橡皮擦擦除 撤销操作 保存成图片 兼容移动端（支持触摸）  好了，废话少说，先看最终效果：https://zhoushuozh.github.io/drawingborad 准备工作首先，准备个容器,也就是画板了。1&amp;lt;can">
@@ -26,7 +28,7 @@
 <link rel="stylesheet" href="/theme.330abf0f9223d716e541.css">
 <link rel="stylesheet" href="/fonts.e15b7f98c5fa14803416.css">
 <link rel="stylesheet" href="/styles.192103d5443607e2ac6a.css">
-<script src="/config.a656e75badd53cd5adf0.js"></script>
+<script src="/config.d7aab7bc6c3cdc4fab9d.js"></script>
 <script type="application/ld+json">[{"@context":"http://schema.org","@type":"WebSite","publisher":{"@type":"Person","name":"zhoushuo","description":"Good judgment comes from experience, and experience comes from bad judgment.","image":"https://blog.zhoushuo.me/images/avatar.png"},"url":"https://blog.zhoushuo.me","image":"https://blog.zhoushuo.me/images/avatar.png","description":"个人博客，学习、记录、总结。","author":{"@type":"Person","name":"zhoushuo","description":"Good judgment comes from experience, and experience comes from bad judgment.","image":"https://blog.zhoushuo.me/images/avatar.png"},"inLanguage":{"@type":"Language","alternateName":"zh-Hans"}},{"@context":"http://schema.org","@type":"Article","articleSection":"前端","url":"https://blog.zhoushuo.me/2018/03/11/drawing-borad/","headline":"使用JS和Canvas做一个画板","image":"https://cdn.zhoushuo.me/zhoushuodrawing.png","datePublished":"2018-03-10T17:22:14.000Z","dateModified":"2019-01-20T12:03:15.165Z","keywords":"JavaScript,HTML5,Canvas","description":"个人博客，学习、记录、总结。","publisher":{"@type":"Organization","name":"周硕的博客","logo":{"@type":"ImageObject","url":"https://blog.zhoushuo.me/images/avatar.png"}},"author":{"@type":"Person","name":"zhoushuo","description":"Good judgment comes from experience, and experience comes from bad judgment.","image":"https://blog.zhoushuo.me/images/avatar.png"},"inLanguage":{"@type":"Language","alternateName":"zh-Hans"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.zhoushuo.me/2018/03/11/drawing-borad/"},"thumbnailUrl":"https://cdn.zhoushuo.me/zhoushuodrawing.png"}]</script><script async src="//www.googletagmanager.com/gtag/js?id=UA-111550549-1"></script>
 <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag('js', new Date());gtag('config', 'UA-111550549-1');</script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
