@@ -1,1 +1,1 @@
-{"name":"周硕的博客","short_name":"zhoushuo's blog","description":"个人博客，学习、记录、总结。","start_url":".","theme_color":"#2a2b33","background_color":"#2a2b33","icons":[],"display":"minimal-ui"}
+{"name":"ZhouShuo’s blog","short_name":"shuo","description":"个人博客，学习、记录、总结。","start_url":"/","theme_color":"#2a2b33","background_color":"#2a2b33","icons":[{"src":"/images/icon-194x194.png","sizes":"194x194 512x512","type":"image/png"},{"src":"/images/icon-144x144.png","sizes":"144x144","type":"image/png"}],"display":"minimal-ui"}
