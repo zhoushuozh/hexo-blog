@@ -2,7 +2,7 @@ importScripts('https://g.alicdn.com/kg/workbox/3.3.0/workbox-sw.js');
 self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.keys().then(function (names) {
-      var validSets = ["is-sw-32d166","is-html-32d166"];
+      var validSets = ["is-sw-2eddac","is-html-2eddac"];
       return Promise.all(
         names
           .filter(function (name) { return !~validSets.indexOf(name); })
@@ -16,7 +16,7 @@ self.addEventListener('install', function (event) {
 });
 
 workbox.routing.registerRoute(new RegExp('sw\\.js'), workbox.strategies.networkOnly({
-  cacheName: 'is-sw-32d166',
+  cacheName: 'is-sw-2eddac',
 }));
 
 workbox.routing.registerRoute(new RegExp('/.*(:?/[^\\.]*/?)$'), function(context) {
