@@ -2,7 +2,7 @@
 <html lang="zh-Hans">
 <head>
 <meta charset="utf-8">
-<title>周硕的博客</title>
+<title>JavaScript常见原生DOM操作API总结 - 周硕的博客</title>
 <base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 <link rel="canonical" href="https://blog.zhoushuo.me/post/dom-api/">
@@ -10,25 +10,25 @@
 <link rel="manifest" href="/manifest.json">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
-<meta name="description" content="基本概念DOMDOM全称是Document Object Model(文档对象模型)，是HTML和XML文档的编程接口。它提供了对文档的结构化的表述，并定义了一种方式可以使从程序中对该结构进行访问，从而改变文档的结构，样式和内容。DOM 将文档解析为一个由节点和对象（包含属性和方法的对象）组成的结构集合。 DOM 只是一个接口规范，可以用各种语言实现。所以严格地说，DOM 不是 JavaScrip">
+<meta name="description" content="随着Vue、React等MV*框架的出现，jQuery时代提供的强大便利的操作DOM的API在前端项目里用得越来越少，数据驱动视图的模式越来越深入人心，加上DOM操作的成本非常高，操作DOM越来越不被提倡。但在一些特殊情况下，操作DOM还是避免不了的，本文就简单总结一下DOM的基本概念和一些常用的DOM操作API。">
 <meta name="keywords" content="JavaScript,DOM">
 <meta property="og:type" content="website">
 <meta property="og:title" content="JavaScript常见原生DOM操作API总结">
 <meta property="og:url" content="https://blog.zhoushuo.me/post/dom-api/index.html">
 <meta property="og:site_name" content="周硕的博客">
-<meta property="og:description" content="基本概念DOMDOM全称是Document Object Model(文档对象模型)，是HTML和XML文档的编程接口。它提供了对文档的结构化的表述，并定义了一种方式可以使从程序中对该结构进行访问，从而改变文档的结构，样式和内容。DOM 将文档解析为一个由节点和对象（包含属性和方法的对象）组成的结构集合。 DOM 只是一个接口规范，可以用各种语言实现。所以严格地说，DOM 不是 JavaScrip">
+<meta property="og:description" content="随着Vue、React等MV*框架的出现，jQuery时代提供的强大便利的操作DOM的API在前端项目里用得越来越少，数据驱动视图的模式越来越深入人心，加上DOM操作的成本非常高，操作DOM越来越不被提倡。但在一些特殊情况下，操作DOM还是避免不了的，本文就简单总结一下DOM的基本概念和一些常用的DOM操作API。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://blog.zhoushuo.me/images/avatar.png">
-<meta property="og:updated_time" content="2019-01-20T12:07:29.350Z">
+<meta property="og:updated_time" content="2019-02-15T03:01:54.435Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript常见原生DOM操作API总结">
-<meta name="twitter:description" content="基本概念DOMDOM全称是Document Object Model(文档对象模型)，是HTML和XML文档的编程接口。它提供了对文档的结构化的表述，并定义了一种方式可以使从程序中对该结构进行访问，从而改变文档的结构，样式和内容。DOM 将文档解析为一个由节点和对象（包含属性和方法的对象）组成的结构集合。 DOM 只是一个接口规范，可以用各种语言实现。所以严格地说，DOM 不是 JavaScrip">
+<meta name="twitter:description" content="随着Vue、React等MV*框架的出现，jQuery时代提供的强大便利的操作DOM的API在前端项目里用得越来越少，数据驱动视图的模式越来越深入人心，加上DOM操作的成本非常高，操作DOM越来越不被提倡。但在一些特殊情况下，操作DOM还是避免不了的，本文就简单总结一下DOM的基本概念和一些常用的DOM操作API。">
 <meta name="twitter:image" content="https://blog.zhoushuo.me/images/avatar.png">
 <link rel="stylesheet" href="/fonts.b9b22ef890c930ac7a13.css">
-<link rel="stylesheet" href="/styles.1e7200807f7996de7bbf.css">
-<link rel="stylesheet" href="/theme.6734f05560165ff8c9c9.css">
-<script src="/config.c071d712b553e60cbbb3.js"></script>
-<script type="application/ld+json">[{"@context":"http://schema.org","@type":"WebSite","publisher":{"@type":"Person","name":"zhoushuo","description":"Good judgment comes from experience, and experience comes from bad judgment.","image":"https://blog.zhoushuo.me/images/avatar.png"},"url":"https://blog.zhoushuo.me","image":"https://blog.zhoushuo.me/images/avatar.png","description":"个人博客，学习、记录、总结。","author":{"@type":"Person","name":"zhoushuo","description":"Good judgment comes from experience, and experience comes from bad judgment.","image":"https://blog.zhoushuo.me/images/avatar.png"},"inLanguage":{"@type":"Language","alternateName":"zh-Hans"}}]</script><script async src="//www.googletagmanager.com/gtag/js?id=UA-111550549-1"></script>
+<link rel="stylesheet" href="/styles.942c2aa7be6bc74cfb59.css">
+<link rel="stylesheet" href="/theme.533d5246131d4f7490b7.css">
+<script src="/config.8f6bb62f47bd5594e68d.js"></script>
+<script type="application/ld+json">[{"@context":"http://schema.org","@type":"WebSite","publisher":{"@type":"Person","name":"zhoushuo","description":"Good judgment comes from experience, and experience comes from bad judgment.","image":"https://blog.zhoushuo.me/images/avatar.png"},"url":"https://blog.zhoushuo.me","image":"https://blog.zhoushuo.me/images/avatar.png","description":"个人博客，学习、记录、总结。","author":{"@type":"Person","name":"zhoushuo","description":"Good judgment comes from experience, and experience comes from bad judgment.","image":"https://blog.zhoushuo.me/images/avatar.png"},"inLanguage":{"@type":"Language","alternateName":"zh-Hans"}},{"@context":"http://schema.org","@type":"Article","articleSection":"前端","url":"https://blog.zhoushuo.me/2018/04/06/dom-api/","headline":"JavaScript常见原生DOM操作API总结","image":"https://blog.zhoushuo.me/images/avatar.png","datePublished":"2018-04-05T21:38:39.000Z","dateModified":"2019-02-15T03:01:54.435Z","keywords":"JavaScript,DOM","description":"随着Vue、React等MV*框架的出现，jQuery时代提供的强大便利的操作DOM的API在前端项目里用得越来越少，数据驱动视图的模式越来越深入人心，加上DOM操作的成本非常高，操作DOM越来越不被提倡。但在一些特殊情况下，操作DOM还是避免不了的，本文就简单总结一下DOM的基本概念和一些常用的DOM操作API。","publisher":{"@type":"Organization","name":"周硕的博客","logo":{"@type":"ImageObject","url":"https://blog.zhoushuo.me/images/avatar.png"}},"author":{"@type":"Person","name":"zhoushuo","description":"Good judgment comes from experience, and experience comes from bad judgment.","image":"https://blog.zhoushuo.me/images/avatar.png"},"inLanguage":{"@type":"Language","alternateName":"zh-Hans"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.zhoushuo.me/2018/04/06/dom-api/"}}]</script><script async src="//www.googletagmanager.com/gtag/js?id=UA-111550549-1"></script>
 <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag('js', new Date());gtag('config', 'UA-111550549-1');</script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 </head>
