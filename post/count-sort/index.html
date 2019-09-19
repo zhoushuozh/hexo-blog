@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-Hans">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>计数排序解析及JavaScript实现 - 周硕的博客</title>
@@ -9,7 +9,7 @@
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="manifest" href="/manifest.json">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="description" content="计数排序（Counting sort）是一种稳定的线性时间排序算法。 计数排序使用一个额外的数组}C ，其中第i个元素是待排序数组 A 中值等于 i 的元素的个数。然后根据数组 C 来将 A 中的元素排到正确的位置。当输入的元素是 n 个 0 到 k 之间的整数时，它的运行时间是 Θ(n+k)。计数排序不是比较排序，排序的速度快于任何比较排序算法。">
 <meta name="keywords" content="JavaScript,算法">
 <meta property="og:type" content="website">
@@ -17,24 +17,26 @@
 <meta property="og:url" content="https://blog.zhoushuo.me/post/count-sort/index.html">
 <meta property="og:site_name" content="周硕的博客">
 <meta property="og:description" content="计数排序（Counting sort）是一种稳定的线性时间排序算法。 计数排序使用一个额外的数组}C ，其中第i个元素是待排序数组 A 中值等于 i 的元素的个数。然后根据数组 C 来将 A 中的元素排到正确的位置。当输入的元素是 n 个 0 到 k 之间的整数时，它的运行时间是 Θ(n+k)。计数排序不是比较排序，排序的速度快于任何比较排序算法。">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale" content="en">
 <meta property="og:image" content="https://blog.zhoushuo.me/images/avatar.png">
 <meta property="og:updated_time" content="2019-02-15T03:17:22.886Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计数排序解析及JavaScript实现">
 <meta name="twitter:description" content="计数排序（Counting sort）是一种稳定的线性时间排序算法。 计数排序使用一个额外的数组}C ，其中第i个元素是待排序数组 A 中值等于 i 的元素的个数。然后根据数组 C 来将 A 中的元素排到正确的位置。当输入的元素是 n 个 0 到 k 之间的整数时，它的运行时间是 Θ(n+k)。计数排序不是比较排序，排序的速度快于任何比较排序算法。">
 <meta name="twitter:image" content="https://blog.zhoushuo.me/images/avatar.png">
-<link rel="stylesheet" href="/fonts.b9b22ef890c930ac7a13.css">
-<link rel="stylesheet" href="/styles.942c2aa7be6bc74cfb59.css">
-<link rel="stylesheet" href="/theme.533d5246131d4f7490b7.css">
-<script src="/config.8f6bb62f47bd5594e68d.js"></script>
-<script type="application/ld+json">[{"@context":"http://schema.org","@type":"WebSite","publisher":{"@type":"Person","name":"zhoushuo","description":"Good judgment comes from experience, and experience comes from bad judgment.","image":"https://blog.zhoushuo.me/images/avatar.png"},"url":"https://blog.zhoushuo.me","image":"https://blog.zhoushuo.me/images/avatar.png","description":"个人博客，学习、记录、总结。","author":{"@type":"Person","name":"zhoushuo","description":"Good judgment comes from experience, and experience comes from bad judgment.","image":"https://blog.zhoushuo.me/images/avatar.png"},"inLanguage":{"@type":"Language","alternateName":"zh-Hans"}},{"@context":"http://schema.org","@type":"Article","articleSection":"前端","url":"https://blog.zhoushuo.me/2018/02/27/count-sort/","headline":"计数排序解析及JavaScript实现","image":"https://blog.zhoushuo.me/images/avatar.png","datePublished":"2018-02-26T22:32:45.000Z","dateModified":"2019-02-15T03:17:22.886Z","keywords":"JavaScript,算法","description":"计数排序（Counting sort）是一种稳定的线性时间排序算法。\n计数排序使用一个额外的数组}C ，其中第i个元素是待排序数组 A 中值等于 i 的元素的个数。然后根据数组 C 来将 A 中的元素排到正确的位置。当输入的元素是 n 个 0 到 k 之间的整数时，它的运行时间是 Θ(n+k)。计数排序不是比较排序，排序的速度快于任何比较排序算法。","publisher":{"@type":"Organization","name":"周硕的博客","logo":{"@type":"ImageObject","url":"https://blog.zhoushuo.me/images/avatar.png"}},"author":{"@type":"Person","name":"zhoushuo","description":"Good judgment comes from experience, and experience comes from bad judgment.","image":"https://blog.zhoushuo.me/images/avatar.png"},"inLanguage":{"@type":"Language","alternateName":"zh-Hans"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.zhoushuo.me/2018/02/27/count-sort/"}}]</script><script async src="//www.googletagmanager.com/gtag/js?id=UA-111550549-1"></script>
-<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag('js', new Date());gtag('config', 'UA-111550549-1');</script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script type="application/ld+json">[{"@context":"http://schema.org","@type":"WebSite","publisher":{"@type":"Person","name":"zhoushuo","description":"Awesome guy.","image":"https://blog.zhoushuo.me/images/avatar.png"},"url":"https://blog.zhoushuo.me","image":"https://blog.zhoushuo.me/images/avatar.png","description":"个人博客，学习、记录、总结。","author":{"@type":"Person","name":"zhoushuo","description":"Awesome guy.","image":"https://blog.zhoushuo.me/images/avatar.png"},"inLanguage":{"@type":"Language","alternateName":"en"}},{"@context":"http://schema.org","@type":"Article","articleSection":"前端","url":"https://blog.zhoushuo.me/post/count-sort/","headline":"计数排序解析及JavaScript实现","image":"https://blog.zhoushuo.me/images/avatar.png","datePublished":"2018-02-26T14:32:45.000Z","dateModified":"2019-02-15T03:17:22.886Z","keywords":"JavaScript,算法","description":"计数排序（Counting sort）是一种稳定的线性时间排序算法。\n计数排序使用一个额外的数组}C ，其中第i个元素是待排序数组 A 中值等于 i 的元素的个数。然后根据数组 C 来将 A 中的元素排到正确的位置。当输入的元素是 n 个 0 到 k 之间的整数时，它的运行时间是 Θ(n+k)。计数排序不是比较排序，排序的速度快于任何比较排序算法。","publisher":{"@type":"Organization","name":"周硕的博客","logo":{"@type":"ImageObject","url":"https://blog.zhoushuo.me/images/avatar.png"}},"author":{"@type":"Person","name":"zhoushuo","description":"Awesome guy.","image":"https://blog.zhoushuo.me/images/avatar.png"},"inLanguage":{"@type":"Language","alternateName":"en"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.zhoushuo.me/post/count-sort/"}}]</script>
+<link href="//fonts.googleapis.com/css?family=Baloo+Bhaijaan|Inconsolata|Josefin+Sans|Montserrat" rel="stylesheet">
+<link href="/styles.e987407a0a9d77c7ba00.css" rel="stylesheet">
+<link rel="stylesheet" href="/theme.dd224cf7f9db0d221888.css">
+<script src="/config.14cffa00373e05b38c81.js"></script>
+<script async src="//www.googletagmanager.com/gtag/js?id=UA-111550549-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','UA-111550549-1');</script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 </head>
-<body>
-<is-d2a57d></is-d2a57d>
-<script src="/runtime.a5dd35324ddfd942bef1.js"></script>
-<script src="/polyfills.bd3fb034406e30e3b5dc.js"></script>
-<script src="/main.35db329abe274f9abe5f.zh-Hans.js"></script></body>
+<body lang="en">
+<is-a></is-a>
+<script src="/runtime.caef73fae70e33459c5a.js"></script>
+<script src="/polyfills.28555e618578fe61f50a.js"></script>
+<script src="/main.3c8fe2175e9d028e033b.js"></script>
+</body>
 </html>
