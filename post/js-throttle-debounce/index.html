@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>JS函数节流(throttle)与函数去抖(debounce) - 周硕的博客</title>
+<title>JS函数节流(throttle)与函数去抖(debounce) - ZhouShuo&#39;s blog</title>
 <base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 <link rel="canonical" href="https://blog.zhoushuo.me/post/js-throttle-debounce/">
@@ -15,7 +15,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="JS函数节流(throttle)与函数去抖(debounce)">
 <meta property="og:url" content="https://blog.zhoushuo.me/post/js-throttle-debounce/index.html">
-<meta property="og:site_name" content="周硕的博客">
+<meta property="og:site_name" content="ZhouShuo&#39;s blog">
 <meta property="og:description" content="在浏览器 DOM 事件里面，有一些事件会随着用户的操作不间断触发。如：改变窗口大小（resize）、鼠标滚动（scroll）、鼠标移动（mousemove），如果把逻辑函数直接绑定到这些事件上，会严重影响性能，再比如把ajax请求直接绑定到keydown事件上，将在用户输入时产生频率很高的ajax请求，给服务器造成不必要的响应压力。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://blog.zhoushuo.me/images/avatar.jpg">
@@ -24,11 +24,11 @@
 <meta name="twitter:title" content="JS函数节流(throttle)与函数去抖(debounce)">
 <meta name="twitter:description" content="在浏览器 DOM 事件里面，有一些事件会随着用户的操作不间断触发。如：改变窗口大小（resize）、鼠标滚动（scroll）、鼠标移动（mousemove），如果把逻辑函数直接绑定到这些事件上，会严重影响性能，再比如把ajax请求直接绑定到keydown事件上，将在用户输入时产生频率很高的ajax请求，给服务器造成不必要的响应压力。">
 <meta name="twitter:image" content="https://blog.zhoushuo.me/images/avatar.jpg">
-<script type="application/ld+json">[{"@context":"http://schema.org","@type":"WebSite","publisher":{"@type":"Person","name":"zhoushuo","description":"The sooner you start to code, the longer the program will take.","image":"https://blog.zhoushuo.me/images/avatar.jpg"},"url":"https://blog.zhoushuo.me","image":"https://blog.zhoushuo.me/images/avatar.jpg","description":"个人博客，学习、记录、总结。","author":{"@type":"Person","name":"zhoushuo","description":"The sooner you start to code, the longer the program will take.","image":"https://blog.zhoushuo.me/images/avatar.jpg"},"inLanguage":{"@type":"Language","alternateName":"en"}},{"@context":"http://schema.org","@type":"Article","articleSection":"前端","url":"https://blog.zhoushuo.me/post/js-throttle-debounce/","headline":"JS函数节流(throttle)与函数去抖(debounce)","image":"https://blog.zhoushuo.me/images/avatar.jpg","datePublished":"2018-01-18T13:23:43.000Z","dateModified":"2019-02-15T03:23:31.135Z","keywords":"性能优化,JavaScript","description":"在浏览器 DOM 事件里面，有一些事件会随着用户的操作不间断触发。如：改变窗口大小（resize）、鼠标滚动（scroll）、鼠标移动（mousemove），如果把逻辑函数直接绑定到这些事件上，会严重影响性能，再比如把ajax请求直接绑定到keydown事件上，将在用户输入时产生频率很高的ajax请求，给服务器造成不必要的响应压力。","publisher":{"@type":"Organization","name":"周硕的博客","logo":{"@type":"ImageObject","url":"https://blog.zhoushuo.me/images/avatar.jpg"}},"author":{"@type":"Person","name":"zhoushuo","description":"The sooner you start to code, the longer the program will take.","image":"https://blog.zhoushuo.me/images/avatar.jpg"},"inLanguage":{"@type":"Language","alternateName":"en"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.zhoushuo.me/post/js-throttle-debounce/"}}]</script>
+<script type="application/ld+json">[{"@context":"http://schema.org","@type":"WebSite","publisher":{"@type":"Person","name":"zhoushuo","description":"The sooner you start to code, the longer the program will take.","image":"https://blog.zhoushuo.me/images/avatar.jpg"},"url":"https://blog.zhoushuo.me","image":"https://blog.zhoushuo.me/images/avatar.jpg","description":"个人博客，学习、记录、总结。","author":{"@type":"Person","name":"zhoushuo","description":"The sooner you start to code, the longer the program will take.","image":"https://blog.zhoushuo.me/images/avatar.jpg"},"inLanguage":{"@type":"Language","alternateName":"en"}},{"@context":"http://schema.org","@type":"Article","articleSection":"前端","url":"https://blog.zhoushuo.me/post/js-throttle-debounce/","headline":"JS函数节流(throttle)与函数去抖(debounce)","image":"https://blog.zhoushuo.me/images/avatar.jpg","datePublished":"2018-01-18T13:23:43.000Z","dateModified":"2019-02-15T03:23:31.135Z","keywords":"性能优化,JavaScript","description":"在浏览器 DOM 事件里面，有一些事件会随着用户的操作不间断触发。如：改变窗口大小（resize）、鼠标滚动（scroll）、鼠标移动（mousemove），如果把逻辑函数直接绑定到这些事件上，会严重影响性能，再比如把ajax请求直接绑定到keydown事件上，将在用户输入时产生频率很高的ajax请求，给服务器造成不必要的响应压力。","publisher":{"@type":"Organization","name":"ZhouShuo's blog","logo":{"@type":"ImageObject","url":"https://blog.zhoushuo.me/images/avatar.jpg"}},"author":{"@type":"Person","name":"zhoushuo","description":"The sooner you start to code, the longer the program will take.","image":"https://blog.zhoushuo.me/images/avatar.jpg"},"inLanguage":{"@type":"Language","alternateName":"en"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.zhoushuo.me/post/js-throttle-debounce/"}}]</script>
 <link href="//fonts.googleapis.com/css?family=Baloo+Bhaijaan|Inconsolata|Josefin+Sans|Montserrat" rel="stylesheet">
 <link href="/styles.e987407a0a9d77c7ba00.css" rel="stylesheet">
 <link rel="stylesheet" href="/theme.dd224cf7f9db0d221888.css">
-<script src="/config.bd4b9c1ad6bd1f431794.js"></script>
+<script src="/config.11ce543f46aa969c7de4.js"></script>
 <script async src="//www.googletagmanager.com/gtag/js?id=UA-111550549-1"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','UA-111550549-1');</script><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
